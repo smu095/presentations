@@ -1,0 +1,3 @@
+# Standardising documentation
+
+Numpy docstrings
