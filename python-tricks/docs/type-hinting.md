@@ -57,6 +57,8 @@ print(hello("Hello my friend!", caps=True))
 print(hello("Hello my friend!", caps="True"))
 ```
 
+This program runs fine, even though we pass the wrong kind of argument to the function. In this contrived example it doesn't really matter, but ideally we would like to catch this mistake.
+
 Running mypy on `type_hinting_example.py` in your shell results in:
 
 ```shell
