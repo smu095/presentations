@@ -153,7 +153,7 @@ def print_text(some_text =None):
 
 To check the script for errors, simply type `flake8 linting_example.py` in you terminal. In my shell, this results in the following output:
 
-![lint1](/Users/sean/Documents/inmeta/presentations/python-tricks/lint1.gif)
+![lint1](../imgs/lint1.gif)
 
 The syntax of the error message is
 
@@ -188,7 +188,7 @@ def print_text(some_text=None):
 
 This time, running `flake8 linting_example_fixed.py` in the terminal results in no output, indicating that everything is OK:
 
-![lint2](/Users/sean/Documents/inmeta/presentations/python-tricks/lint2.gif)
+![lint2](../imgs/lint2.gif)
 
 ### Autoformatting code
 
@@ -221,7 +221,7 @@ def long_function(input_dictionary: Dict[str, int], list_of_numbers: List[int], 
 
 To autoformat, run the command `black pre_black.py` in the terminal. **Remember:** `black` formats your code in place!
 
-![black](/Users/sean/Documents/inmeta/presentations/python-tricks/black.gif)
+![black](../imgs/black.gif)
 
 The output indicates that errors have been detected and that the file `pre_black.py` has been reformatted. After running `black`, the script looks like this:
 
