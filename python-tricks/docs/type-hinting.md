@@ -4,9 +4,7 @@ Summary based on [Python Type Checking (Guide)](https://realpython.com/python-ty
 
 ### Background
 
-Python is a dynamically typed language. 
-
-This means that Python only does type checking only as the code runs. For example:
+Python is a dynamically typed language. This means that Python only does type checking only as the code runs. For example:
 
 ```python
 >>> if False:
@@ -205,3 +203,32 @@ type_hinting_example.py:17: error: Argument "caps" to "hello" has incompatible t
 ```
 
 **Note:** Some popular packages, such as NumPy, do not contain type hints. In these cases, we want to use the `--ignore-missing-import` command line option when running mypy.
+
+## Resources
+
+#### Documentation
+
+[PEP 484: Type Hints](https://www.python.org/dev/peps/pep-0484/)
+
+[PEP 3107: Function Annotations](https://www.python.org/dev/peps/pep-3107/)
+
+[PEP 526: Syntax for Variable Annotation](https://www.python.org/dev/peps/pep-0526/)
+
+[PEP 563: Postponed Evaluation of Annotations](https://www.python.org/dev/peps/pep-0563/)
+
+#### Blogs
+
+[A deep dive on Python type hints (Vicki Boykis)](https://veekaybee.github.io/2019/07/08/python-type-hints/)
+
+[The state of type hints in Python (Bernat Gabor)](https://www.bernat.tech/the-state-of-type-hints-in-python/)
+
+#### Tutorials
+
+[RealPython: Python Type Checking (Guide)](https://realpython.com/python-type-checking/)
+
+#### Presentations
+
+[Type hinting and Mypy (Bernat Gabor, PyCon2019)](https://www.youtube.com/watch?v=hTrjTAPnA_k)
+
+[Getting started with Mypy and type checking (Jukka Lehtosalo, europython 2018)](https://www.youtube.com/watch?v=18nZ5xMeGno)
+
