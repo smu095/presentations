@@ -83,3 +83,8 @@ list
 [PEP 8: Style Guide for Python](https://www.python.org/dev/peps/pep-0257/)
 
 [PEP 257: Docstring Conventions](https://www.python.org/dev/peps/pep-0257/)
+
+[Numpydoc docstring guide](https://numpydoc.readthedocs.io/en/latest/format.html)
+
+[Google docstring guide (section 3.8)](https://github.com/google/styleguide/blob/gh-pages/pyguide.md)
+

@@ -6,7 +6,9 @@ Code is read far more often than it is written. Concistency is very important, b
 
 [PEP 8](https://www.python.org/dev/peps/pep-0008/) (PEP is shorthand for **P**ython **E**nhancement **P**roposal, a kind of developer document for Python) addresses the issue of code consistency by introducing a style guide for Python programmers. This style guide is a set of recommendations and best practices that improve readability and consistency of Python code. 
 
-In the following we briefly summarise some of the most important points. This is not an exhaustive list, please refer to [PEP 8](https://www.python.org/dev/peps/pep-0008/) for the complete style guide. [RealPython: How to Write Beautiful Python Code With PEP 8](https://realpython.com/python-pep8/) is also a nice guide. After reviewing some of the recommendations in PEP 8, we will briefly introduce linters and autoformatters.
+In the following we briefly summarise some of the most important points. This is not an exhaustive list, **please refer to [PEP 8](https://www.python.org/dev/peps/pep-0008/) for the complete style guide**. [RealPython: How to Write Beautiful Python Code With PEP 8](https://realpython.com/python-pep8/) is also a nice guide. 
+
+In the following we will review some of the recommendations in PEP 8 and we will briefly introduce linters and autoformatters.
 
 ## Naming conventions
 
@@ -261,4 +263,21 @@ Code consistency is important. [PEP 8](https://www.python.org/dev/peps/pep-0008/
 
 ## Resources
 
-TODO
+### Documentation
+
+[PEP 8: Style Guide for Python Code](https://www.python.org/dev/peps/pep-0008/)
+
+### Tools
+
+[Flake8 docs](http://flake8.pycqa.org/en/latest/)
+
+* [pycodestyle](https://pycodestyle.readthedocs.io/en/latest/)
+* [pyflakes](https://github.com/PyCQA/pyflakes)
+* [mccabe](https://github.com/pycqa/mccabe)
+
+[Black docs](https://black.readthedocs.io/en/stable/index.html)
+
+### Presentations
+
+[[PyCon2019] Life Is Better Painted Black, or How to Stop Worrying and Embrace Autoformatting (Lukasz Langa)](https://www.youtube.com/watch?v=esZLCuWs_2Y)
+
