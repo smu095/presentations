@@ -1,4 +1,4 @@
 .DS_Store
 .mypy_cache
 .ipynb_checkpoints
-.vscoder
+.vscode
