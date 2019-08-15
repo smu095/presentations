@@ -2,9 +2,9 @@
 
 > A Foolish Consistency is the Hobgoblin of Little Minds (PEP 8)
 
-Code is read far more often than it is written. Concistency is very important, both for your colleagues and your future self.
+Code is read far more often than it is written. Concistency is very important, both for the sanity of your colleagues and the mental health of your future self.
 
-[PEP 8](https://www.python.org/dev/peps/pep-0008/) addresses the issue of code consistency by introducing a style guide for Python programmers. This style guide is a set of recommendations and best practices that improve readability and consistency of Python code. 
+[PEP 8](https://www.python.org/dev/peps/pep-0008/) (PEP is shorthand for **P**ython **E**nhancement **P**roposal, a kind of developer document for Python) addresses the issue of code consistency by introducing a style guide for Python programmers. This style guide is a set of recommendations and best practices that improve readability and consistency of Python code. 
 
 In the following we briefly summarise some of the most important points. This is not an exhaustive list, please refer to [PEP 8](https://www.python.org/dev/peps/pep-0008/) for the complete style guide. [RealPython: How to Write Beautiful Python Code With PEP 8](https://realpython.com/python-pep8/) is also a nice guide. After reviewing some of the recommendations in PEP 8, we will briefly introduce linters and autoformatters.
 
