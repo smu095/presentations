@@ -2,8 +2,6 @@
 
 Summary based on [Python Type Checking (Guide)](https://realpython.com/python-type-checking/) at [realpython.com](https://realpython.com/).
 
-### Background
-
 Python is a dynamically typed language. This means that Python only does type checking only as the code runs. For example:
 
 ```python
@@ -36,7 +34,7 @@ thing = "Hello";
 
 In the snippet above, `thing` can never be assigned a value that is not a `String` object.
 
-### What is type hinting?
+##  What is type hinting?
 
 [PEP 484](https://www.python.org/dev/peps/pep-0484/) introduces *type hinting* which makes it possible to do static type checking in Python. 
 
@@ -68,7 +66,7 @@ type_hinting_example.py:17: error: Argument "caps" to "hello" has incompatible t
 
 Mypy tells us we are using the wrong type in line 17.
 
-### Why are type hints useful?
+## Why are type hints useful?
 
 Type hints are good because they:
 
@@ -85,7 +83,7 @@ Type hints are not so good because they:
 * introduce some overhead,
 * introduces unneeded verbosity.
 
-### Should you use type hinting?
+## Should you use type hinting?
 
 Considerations:
 
@@ -96,7 +94,7 @@ Quoting [The State of Type Hints in Python](https://www.bernat.tech/the-state-of
 
 > Type hints should be used whenever unit tests are worth writing.
 
-### Syntax of function annotation
+## Syntax of function annotation
 
 You can annotate arguments and return value of a function in Python 3. Consider again `type_hinting_example.py`:
 
@@ -128,7 +126,7 @@ pi: float = 3.142
 empty_string: str # We can assign types without assigning values
 ```
 
-### The `typing` module
+##The `typing` module
 
 How do we annotate composite types, like a list of strings or a tuple of integers? Enter the `typing` module:
 
@@ -158,6 +156,8 @@ def some_function(optional_string: Optional[str] = None) -> None:
 Alternatively, one could use `Union[None, str]` which can be read as one of `None` *or* `int`.
 
 **Note:** Since `some_function` does not have a return value, we annotate it with `-> None`.
+
+## Miscellaneous
 
 ### Type hinting in object-oriented programming
 
@@ -189,7 +189,7 @@ def do_twice(func: Callable[[str], str], argument: str) -> None:
 
 **Note:** `Callable[[str], str]` indicates that the function accepts a string as an argument and returns a string.
 
-### Performing type checking
+## Performing type checking
 
 Performing static type checking is done through [mypy](http://mypy-lang.org/). Install using `pip`:
 
