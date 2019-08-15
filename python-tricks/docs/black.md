@@ -1,6 +1,6 @@
 # Python coding style
 
-### A Foolish Consistency is the Hobgoblin of Little Minds
+> A Foolish Consistency is the Hobgoblin of Little Minds (PEP 8)
 
 Code is read far more often than it is written. Concistency is very important, both for your colleagues and your future self.
 
@@ -8,7 +8,7 @@ Code is read far more often than it is written. Concistency is very important, b
 
 In the following we briefly summarise some of the most important points. This is not an exhaustive list, please refer to [PEP 8](https://www.python.org/dev/peps/pep-0008/) for the complete style guide. [RealPython: How to Write Beautiful Python Code With PEP 8](https://realpython.com/python-pep8/) is also a nice guide. After reviewing some of the recommendations in PEP 8, we will briefly introduce linters and autoformatters.
 
-### Naming conventions
+## Naming conventions
 
 In the table below we review some of the naming conventions recommended in PEP 8. In addition to these naming conventions, it is considered good practice to give variables, functions and classes descriptive names.
 
@@ -22,7 +22,7 @@ In the table below we review some of the naming conventions recommended in PEP 8
 | Module   | Short, lowercase word or words separated by underscores.     | `module.py`, `my_module.py`                    |
 | Package  | Short, lowercase word or words. Do not separate with underscores. | `package`, `mypackage`                         |
 
-### Code layout
+## Code layout
 
 **Whitespace.** Surround top-level functions and modules with *two blanklines*. Surround method definitions with *one blankline*. Use blanklines sparingly inside function definitions, preferably to separate code into logical, readable sections. 
 
@@ -121,7 +121,7 @@ if not empty_list:
   print("List is empty!")
 ```
 
-### Linting
+## Linting
 
 A linter is a tool that automatically checks your code for lint. Lint is a piece of code which contains 
 
@@ -190,7 +190,7 @@ This time, running `flake8 linting_example_fixed.py` in the terminal results in 
 
 ![lint2](../imgs/lint2.gif)
 
-### Autoformatting code
+## Autoformatting code
 
 As mentioned earlier, linters can help you detect errors but they don't necessarily fix them. Fortunately, there are tools in Python which both lint and format your code. My favourite is `black` (install with  `pip install black`).
 
@@ -255,7 +255,10 @@ def long_function(
 
 `black` is typically run as a pre-commit hook or as a part of a continuous integration build process.
 
-### Summary
+## Summary
 
 Code consistency is important. [PEP 8](https://www.python.org/dev/peps/pep-0008/) outlines a set of coding style recommendations for Python programmers. Linters like `flake8` will help you detect logical errors and code that is not compliant with PEP 8. Autoformatters such as `black` will automatically refactor your code so that it conforms to PEP 8 standards.
 
+## Resources
+
+TODO
