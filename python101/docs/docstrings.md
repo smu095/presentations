@@ -4,6 +4,8 @@
 
 Python docstrings come in different formats. Which one you choose is up to you, but **stay consistent** within your project.
 
+
+
 ## Docstring formats
 
 In the following we will briefly present some minimal doctoring examples from the three most common formats. The example we use can be found at [RealPython](https://realpython.com/documenting-python-code/#docstring-formats).
@@ -73,6 +75,8 @@ list
     a list of strings representing the header columns
 """
 ```
+
+The Numpy/SciPy docstring format also strongly encourages the inclusion of examples in the docstring. Examples are parsed and run via the `docstring` package. The idea is to make sure that the examples are running as shown. Check the documentation in the Resources section to see how to write docstring examples. **Note:** Examples are not meant to replace unit tests.
 
 
 

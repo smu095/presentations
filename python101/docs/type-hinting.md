@@ -6,9 +6,9 @@ Python is a dynamically typed language. This means that Python only does type ch
 
 ```python
 >>> if False:
-...  1 + "two"
+...     1 + "two"
 ... else:
-...  1 + 2
+...     1 + 2
 3
 
 >>> 1 + "two" # This will throw a TypeError
