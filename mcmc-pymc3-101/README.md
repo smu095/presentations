@@ -5,7 +5,7 @@ methods and their practical applications using the probabilistic programming
 framework PyMC3.
 
 ## Todo list
-See issue ... for the current to do list.
+See [issue #12](https://github.com/smu095/presentations/issues/12) for the current to do list.
 
 ## Contents
 TODO.
