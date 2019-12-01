@@ -25,7 +25,7 @@ $ conda env create -f environment.yml
 $ conda activate fagdag-pymc3
 ```
 
-To enable `black` for autoformatting code in Jupyter notebooks, enter the
+To enable [`black`](https://black.readthedocs.io/en/stable/) for autoformatting code in Jupyter notebooks, enter the
 following commands in the terminal:
 
 ```bash
@@ -37,5 +37,5 @@ To enable autoformatting, click `View > Toggle Toolbar` after opening a new
 notebook.
 ## Contributions
 Pull request (PRs) are welcome. Note that this repo enforces master protection. Contributors must submit a PR and be reviewed before being approved for merging into the master branch. We require that code is
-[PEP8 compliant](https://www.python.org/dev/peps/pep-0008/) and autoformatted using `[black](https://black.readthedocs.io/en/stable/)`.
+[PEP8 compliant](https://www.python.org/dev/peps/pep-0008/) and autoformatted using [`black`](https://black.readthedocs.io/en/stable/).
 
