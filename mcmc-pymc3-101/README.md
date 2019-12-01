@@ -18,6 +18,13 @@ See [issue #12](https://github.com/smu095/presentations/issues/12) for the curre
 ```
 
 ## Setup
+This repo assumes that you have installed the [Anaconda distribution](https://www.anaconda.com/distribution/). To create a conda environment with all the necessary dependencies, type the following commands into the terminal:
+
+```bash
+$ conda env create -f environment.yml
+$ conda activate fagdag-pymc3
+```
+
 To enable `black` for autoformatting code in Jupyter notebooks, enter the
 following commands in the terminal:
 
@@ -30,5 +37,5 @@ To enable autoformatting, click `View > Toggle Toolbar` after opening a new
 notebook.
 ## Contributions
 Pull request (PRs) are welcome. Note that this repo enforces master protection. Contributors must submit a PR and be reviewed before being approved for merging into the master branch. We require that code is
-[PEP8 compliant](https://www.python.org/dev/peps/pep-0008/) and autoformatted using `black`.
+[PEP8 compliant](https://www.python.org/dev/peps/pep-0008/) and autoformatted using `[black](https://black.readthedocs.io/en/stable/)`.
 
