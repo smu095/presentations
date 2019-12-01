@@ -1,4 +1,14 @@
+# Ignoring annoying, hidden files
 .DS_Store
 .mypy_cache
 .ipynb_checkpoints
 .vscode
+
+# Ignoring LaTeX files
+/mcmc-pymc3-101/slides/*
+!/mcmc-pymc3-101/slides/*.tex
+!/mcmc-pymc3-101/slides/*.pdf
+
+/mcmc-pymc3-101/docs/*
+!/mcmc-pymc3-101/docs/*.tex
+!/mcmc-pymc3-101/docs/*.pdf

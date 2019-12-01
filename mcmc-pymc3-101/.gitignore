@@ -1,8 +1,0 @@
-# Ignoring LaTeX files
-/slides/*
-!/slides/*.tex
-!/slides/*.pdf
-
-/docs/*
-!/docs/*.tex
-!/docs/*.pdf
