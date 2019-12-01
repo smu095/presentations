@@ -8,7 +8,14 @@ framework PyMC3.
 See [issue #12](https://github.com/smu095/presentations/issues/12) for the current to do list.
 
 ## Contents
-TODO.
+```bash
+.
+├── README.md
+├── notebooks
+│   └── README.md
+└── slides
+    └── README.md
+```
 
 ## Setup
 TODO.
