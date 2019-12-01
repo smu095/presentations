@@ -36,7 +36,7 @@ $ jupyter nbextension enable jupyter-black-master/jupyter-black
 To enable autoformatting, click `View > Toggle Toolbar` after opening a new
 notebook.
 
-To facilitate code review for Jupyter notebooks, set up a post-save hook as described in the [Jupyter notebook docs](https://jupyter-notebook.readthedocs.io/en/stable/extending/savehooks.html).
+To facilitate code review for Jupyter notebooks, set up a post-save hook as described in the [Jupyter notebook docs](https://jupyter-notebook.readthedocs.io/en/stable/extending/savehooks.html). This saves a `.py` version of your notebook which is much more amenable to review, and should be pushed whenever changes are made to a notebook.
 
 ## Contributions
 Pull request (PRs) are welcome. Note that this repo enforces master protection. Contributors must submit a PR and be reviewed before being approved for merging into the master branch. We require that code is
