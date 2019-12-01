@@ -18,8 +18,16 @@ See [issue #12](https://github.com/smu095/presentations/issues/12) for the curre
 ```
 
 ## Setup
-TODO.
+To enable `black` for autoformatting code in Jupyter notebooks, enter the
+following commands in the terminal:
 
+```bash
+$ jupyter nbextension install https://github.com/drillan/jupyter-black/archive/master.zip --user
+$ jupyter nbextension enable jupyter-black-master/jupyter-black
+```
+
+To enable autoformatting, click `View > Toggle Toolbar` after opening a new
+notebook.
 ## Contributions
 Pull request (PRs) are welcome. Note that this repo enforces master protection. Contributors must submit a PR and be reviewed before being approved for merging into the master branch. We require that code is
 [PEP8 compliant](https://www.python.org/dev/peps/pep-0008/) and autoformatted using `black`.
