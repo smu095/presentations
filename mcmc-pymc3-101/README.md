@@ -1,11 +1,11 @@
 # An introduction to Markov Chain Monte Carlo and PyMC3
 
-This repo will contain presentation materials for Monday talk about MCMC
-methods and their practical applications using the probabilistic programming
-framework PyMC3.
+This repo will contain presentation materials for Monday talk about [Markov Chain Monte Carlo
+methods](https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo) and their practical applications using the [probabilistic programming
+framework PyMC3](https://docs.pymc.io/).
 
 ## Todo list
-See [issue #12](https://github.com/smu095/presentations/issues/12) for the current to do list.
+See [issue #12](https://github.com/smu095/presentations/issues/12) for an up-to-date to do-list.
 
 ## Contents
 ```bash
@@ -18,7 +18,7 @@ See [issue #12](https://github.com/smu095/presentations/issues/12) for the curre
 ```
 
 ## Setup
-This repo assumes that you have installed the [Anaconda distribution](https://www.anaconda.com/distribution/). To create a conda environment with all the necessary dependencies, type the following commands into the terminal:
+This repo assumes that you have installed the [Anaconda distribution](https://www.anaconda.com/distribution/). To create and activate a conda environment with all the necessary dependencies, type the following commands into the terminal:
 
 ```bash
 $ conda env create -f environment.yml
