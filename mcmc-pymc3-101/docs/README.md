@@ -112,11 +112,13 @@ To estimate the expected value of any function of a random variable $f(X)$ where
 
 $$\mathbb{E}[f(X)] = \int f(x)p(x) \,dx \approx \frac{1}{N} \sum_{n=1}^{N} f(x_n)$$.
 
-It can be shown that the error of the MC approximation $(\hat{f} - f) \rightarrow \mathcal{N}\big(0, \frac{\sigma^2}{N}\big)$ as $N \rightarrow \infty$, under some restrictions. This means that $\hat{f}$ is an unbiased estimator of $f$ and that it converges to the true $f$ as the number of samples $N$ gets large.
+It can be shown (under some restrictions) that the error of the MC approximation $(\hat{f} - f) \rightarrow \mathcal{N}\big(0, \frac{\sigma^2}{N}\big)$ as $N \rightarrow \infty$. This means that $\hat{f}$ is an unbiased estimator of $f$ and that it converges to the true $f$ as the number of samples $N$ gets large.
 
-**Example:** A classic application of MC approximation is estimating $\pi$ by calculating the area of a unit circle using random samples from a uniform distribution:
+**Example:** A classic application of MC approximation is estimating $\pi = 3.1415926\ldots$ by calculating the area of a unit circle using random samples from a uniform distribution:
 
-$$\pi \approx \frac{4}{N} \sum_{i=1}^N \mathbf{1}\big(u_{i1}^2 + u_{i2}^2 < 1\big), \quad u_{i1}, u_{i2} \sim U(0, 1).$$
+$$\pi \approx \frac{4}{N} \sum_{i=1}^N \mathbf{1}\big(x_i^2 + y_i^2 < 1\big), \quad x_i, y_i \sim U(0, 1).$$
+
+(Try implementing it in Python!)
 
 
 
