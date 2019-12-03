@@ -12,3 +12,4 @@
 /mcmc-pymc3-101/docs/*
 !/mcmc-pymc3-101/docs/*.tex
 !/mcmc-pymc3-101/docs/*.pdf
+!/mcmc-pymc3-101/docs/*.md
