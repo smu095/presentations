@@ -24,13 +24,13 @@ This is also known as the product rule of probability, which we will revisit sho
 
 A Markov chain typically models a sequence of observations $X_1, X_2,\ldots, X_T$ for some arbitrary $T$. The subscript $t \in T$ can for example denote a time step, but it can also denote the location within a sequence. From now on we simply refer to $t$ as the time step, and we assume that $t$ is discrete, i.e. $t \in \{1, \,\ldots, T\}$. 
 
-The fundamental assumption of a Markov chain is that the present time step contains all the information we need when making predictions about the next time step:
+The fundamental assumption of a Markov chain is that the present time step contains all the information we need to make predictions about the future:
 
 $$P(X_t\,|\,X_{t-1}, X_{t-2}, \ldots, X_1) = P(X_t\,|\,X_{t-1})$$.
 
 This is sometimes referred to as the memoryless property. The joint distribution of a sequence of $T$ event can thus be factorised according to the product rule, but this time incorporating the Markov property:
 
-$$P(X_1, X_2, \,\ldots, X_T) = P(X_1)P(X_2\,|\,X_1)P(X_3\,|\,X_2)\,\ldots = P(X_1) \prod_{i=2}^{T}P(X_t\,|\,X_{t-1})$$
+$$\begin{align*}P(X_1, X_2, \,\ldots, X_T) &= P(X_1)P(X_2\,|\,X_1)P(X_3\,|\,X_2)\,\ldots P(X_T \,|\, X_{t-1}) \\ &= P(X_1) \prod_{i=2}^{T}P(X_t\,|\,X_{t-1})\end{align*}$$
 
 When the state-space of $X_t$ is discrete, so $X_t \in \{1, \,\ldots, K\}$, we have what is called a finite-state Markov chain. We will limit ourselves to these types of models for simplicity.
 
@@ -104,23 +104,33 @@ for all pairs $i$ and $j$. If this holds, the global balance equations are satis
 
 
 
-## Monte Carlo methods
+## Monte Carlo
 
-TODO.
+Monte Carlo (MC) approximation is a random sampling method that, among other things, allows us to estimate sums and integrals. MC is particularly helpful in problems where the desired sum or integral cannot be computed analytically.
+
+To estimate the expected value of any function of a random variable $f(X)$ where $X \sim p(X)$, we generate $N$ samples $x_1, \ldots, x_N$ and approximate it using the empirical distribution of $\{f(x_n)\}_{n=1}^N$:
+
+$$\mathbb{E}[f(X)] = \int f(x)p(x) \,dx \approx \frac{1}{N} \sum_{n=1}^{N} f(x_n)$$.
+
+It can be shown that the error of the MC approximation $(\hat{f} - f) \rightarrow \mathcal{N}\big(0, \frac{\sigma^2}{N}\big)$ as $N \rightarrow \infty$, under some restrictions. This means that $\hat{f}$ is an unbiased estimator of $f$ and that it converges to the true $f$ as the number of samples $N$ gets large.
+
+**Example:** A classic application of MC approximation is estimating $\pi$ by calculating the area of a unit circle using random samples from a uniform distribution:
+
+$$\pi \approx \frac{4}{N} \sum_{i=1}^N \mathbf{1}\big(u_{i1}^2 + u_{i2}^2 < 1\big), \quad u_{i1}, u_{i2} \sim U(0, 1).$$
 
 
 
-## Interlude
+## Interlude: Bayes' theorem
 
 Bayes.
+
+Introduce $p(\theta \,|\, y)$.
 
 
 
 ## Markov Chain Monte Carlo
 
 TODO.
-
-Introduce $p(\theta \,|\, y)$.
 
 
 
