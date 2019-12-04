@@ -80,7 +80,7 @@ Here, $t_{ij}$ is subscripted to account for the fact that the time step can be 
 
 We can never reach states 3 and 4 if we start from states 1 or 2. Similarly, we can never reach any other state if we start in state 4 (an absorbing state).
 
-If we start in states 1 or 2, the stationary distribution is $\pi_{X_1 \in\{1, 2\}} = [0.5, \,0.5,\, 0,\, 0]$ (all transition probabilities are equal, so we expect to visit each state an equal amount). Conversely, if we start in state 4, the stationary distribution is $\pi_{X_1 = 4} = [0,\, 0,\, 0,\, 1.0]$. If we start in state 3, we have a 50/50 chance of the stationary distribution being one of $\pi_{X_1 \in\{1, 2\}}$ or $\pi_{X_1 = 4}$. In other words, there is no unique stationary distribution.
+If we start in states 1 or 2, the stationary distribution is $\pi_{X_1 \in\{1, 2\}} = [0.5, \,0.5,\, 0,\, 0]$ (all transition probabilities are equal, so we expect to spend an equal amount of time in either state). Conversely, if we start in state 4 we never leave, so the stationary distribution is $\pi_{X_1 = 4} = [0,\, 0,\, 0,\, 1.0]$. If we start in state 3, we have a 50/50 chance of the stationary distribution being one of $\pi_{X_1 \in\{1, 2\}}$ or $\pi_{X_1 = 4}$. In other words, there is no unique stationary distribution.
 
 #### Aperiodicity
 
@@ -124,9 +124,47 @@ $$\pi \approx \frac{4}{N} \sum_{i=1}^N \mathbf{1}\big(x_i^2 + y_i^2 < 1\big), \q
 
 ## Interlude: Bayes' theorem
 
-Bayes.
+Bayes' rule states that the conditional probability of an event $A$ given event $B$ can be expressed by
 
-Introduce $p(\theta \,|\, y)$.
+$p(A|B) = \dfrac{p(A)p(B|A)}{p(B)}$.
+
+Bayes' theorem can also be applied to parameter estimation, where the expression becomes:
+
+$p(\theta\, \vert\, X,y) = \dfrac{p(\theta) p(y\, \vert\, X,\theta)}{p(y \, \vert \,X)}$,
+
+or 
+
+$p(\theta\, \vert\,y) = \dfrac{p(\theta) p(y\, \vert\,\theta)}{p(y)}$, 
+
+depending on the textbook you consult. We will use the latter notation for brevity. 
+
+In the context of parameter estimation, the above equation is an expression that encapsulates how our beliefs about a (set of) parameter(s) changes after observing the data $(X,\, y)$. 
+
+#### Priors, likelihoods and posteriors
+
+Let's decode this expression, starting with the numerator on the right-hand side: 
+
+The prior distribution of $\theta$ is denoted by $p(\theta)$. It expresses any beliefs or assumptions we might have about the parameter(s) prior to observing the data. Strong priors are more informative, meaning $p(\theta)$ is more concentrated around some values of $\theta$. On the other hand, having no particular beliefs about the parameters should result in a more uniform, or uninformative, prior.
+
+Next is the likelihood $p(y\, \vert\, \theta)$. The likelihood is a model parameterised by $\theta$ which expresses the plausability of observing the data given some value of $\theta$.
+
+In the denominator we have $p(y)$, also called the marginal likelihood, average likelihood, model evidence, etc. We will call it the average likelihood, because it can be expressed as an expectation:
+
+$p(y) = \mathbb{E}_{\theta}[p(y\,\vert\,\theta)] = \int p(y\,\vert\,\theta)p(\theta)\,d\theta$. 
+
+The average likelihood's job is to serve as a normalising constant, i.e. to ensure that the posterior distribution of the parameters $p(\theta \, \vert \, y)$​ integrates to 1. The posterior distribution is our updated belief about the parameter value(s) $\theta$ after observing the data $(X, y)$.
+
+(Note the slight abuse of notation above: We use $p(\cdot)$ to denote the distributions of the posterior, prior, likelihood and marginal likelihood, but this does not necessarily mean that they share the same distribution.)
+
+#### Posterior predictive distribution
+
+After calculating the posterior distribution of the parameters, we can compute the likelihood of a new observation $x^*$ taking on a certain value $y^*$. The Bayesian approach makes inferences based on the full distribution of $y^*$. This is called the posterior predictive distribution, given by
+
+$p(y^* \, \vert \, y) = \int p( y^* \,\vert\, \theta) p(\theta \,\vert\, y) \,d\theta$.
+
+The posterior predictive distribution can be viewed as an ensemble of models with different settings of $\theta$, weighted by posterior distribution $\theta$. Thus the most likely parameter values will contribute the most to the probability of $y^*$ taking on a particular value. 
+
+Making statements about parameter values and predictions in terms of probability highlights one of the key features of the Bayesian approach: It gives an intuitive and principled way of expressing uncertainty.
 
 
 
