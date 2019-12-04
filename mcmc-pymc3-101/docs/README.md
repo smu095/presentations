@@ -1,3 +1,7 @@
+
+
+
+
 # An introduction to Markov Chain Monte Carlo
 
 WRITE BRIEF INTRODUCTION.
@@ -124,11 +128,11 @@ $$\pi \approx \frac{4}{N} \sum_{i=1}^N \mathbf{1}\big(x_i^2 + y_i^2 < 1\big), \q
 
 ## Interlude: Bayes' theorem
 
-Bayes' rule states that the conditional probability of an event $A$ given event $B$ can be expressed by
+Bayes'  theorem states that the conditional probability of an event $A$ given event $B$ can be expressed by
 
 $p(A|B) = \dfrac{p(A)p(B|A)}{p(B)}$.
 
-Bayes' theorem can also be applied to parameter estimation, where the expression becomes:
+Bayes' theorem can also be applied to parameter estimation, where the expression becomes
 
 $p(\theta\, \vert\, X,y) = \dfrac{p(\theta) p(y\, \vert\, X,\theta)}{p(y \, \vert \,X)}$,
 
@@ -152,7 +156,11 @@ In the denominator we have $p(y)$, also called the marginal likelihood, average 
 
 $p(y) = \mathbb{E}_{\theta}[p(y\,\vert\,\theta)] = \int p(y\,\vert\,\theta)p(\theta)\,d\theta$. 
 
-The average likelihood's job is to serve as a normalising constant, i.e. to ensure that the posterior distribution of the parameters $p(\theta \, \vert \, y)$​ integrates to 1. The posterior distribution is our updated belief about the parameter value(s) $\theta$ after observing the data $(X, y)$.
+The average likelihood's job is to serve as a normalising constant, i.e. to ensure that the posterior distribution of the parameters $p(\theta \, \vert \, y)$​ integrates to 1. The posterior distribution is our updated belief about the parameter value(s) $\theta$ after observing the data $(X, y)$. Often you'll see the notation
+
+$p(\theta \, \vert \, y) \propto p(\theta) p(y\, \vert\,\theta)$,
+
+which ignores the normalising constant $p(y)$, due to the fact that it doesn't depend on $\theta$. The notation $\propto$ indicates that the posterior is proportional to the prior times the likelihood (i.e. it is unnormalised).
 
 (Note the slight abuse of notation above: We use $p(\cdot)$ to denote the distributions of the posterior, prior, likelihood and marginal likelihood, but this does not necessarily mean that they share the same distribution.)
 
@@ -166,13 +174,107 @@ The posterior predictive distribution can be viewed as an ensemble of models wit
 
 Making statements about parameter values and predictions in terms of probability highlights one of the key features of the Bayesian approach: It gives an intuitive and principled way of expressing uncertainty.
 
+#### Proportionality
+
+Sometimes we can select priors and likelihoods (conjugate priors) such that the resulting posterior distribution has a convenient, closed-form analytical solution. This typically works well in a low-dimensional setting (one or two parameters). When the parameter space is high-dimensional things get much more complicated, and the average likelihood becomes intractable. MORE MOTIVATION HERE?
+
 
 
 ## Markov Chain Monte Carlo
 
-TODO.
+The main idea of Markov Chain Monte Carlo (MCMC) methods is to construct a Markov chain over the state space $\Theta$ whose stationary distribution is the target density $p(\theta \,\vert\, y)$ of interest. Recall that the stationary distribution of a Markov chain is the long term probability distribution over states. 
 
+In the MCMC framework, we randomly move around the state space (parameter space) in such a way that the fraction of time we spend in each state (at each parameter value) is proportional to $p(\theta \,\vert\,y)$.
 
+A very general algorithmic view of MCMC is summarised in the following:
+
+1. Start at your current position.
+
+2. Propose a new position.
+
+3. Decide whether or not to make the transition from your current position to the new position.
+
+   a. If the proposal is rejected: remain in your current position, increment $t$ and return to step 1.
+
+   b. If the proposal is accepted: move to the new position, increment $t$ and return to step 1.
+
+4. After a large number of iterations, return the sequence of samples positions. These are your samples from the posterior distribution.
+
+### Metropolis-Hastings
+
+The Metropolis-Hastings (MH) algorithm is one of the most famous MCMC methods.
+
+For $t = 1, \ldots T$:
+
+1. Sample $\theta^*$ from a proposal distribution $q(\theta^* \, \vert \, \theta_{t-1})$.
+
+2. Draw $u \sim \mathcal{U}(0, 1)$.
+
+3. Evaluate $\alpha_{\theta^*}= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)} \cdot \dfrac{q(\theta_{t-1} \, \vert \, \theta^*)}{q(\theta^* \, \vert \, \theta_{t-1})}$.
+
+   Let the acceptance probability be given by $r_{\theta^*}= \text{min}(1, \alpha_{\theta^*})$.
+
+4. Set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < r \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
+
+The ratio of $q\text{'s}$ in $\alpha_{\theta^*}$ is called the Hastings correction, which corrects for asymmetric proposal distributions. Note that if the proposal distribution is symmetric $q(\theta^* \, \vert \, \theta_{t-1}) = q(\theta_{t-1} \, \vert \, \theta^*)$ and the acceptance probability becomes
+
+$r(\theta^* \,\vert\, \theta_{t-1}) = \text{min} \Bigg( 1, \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)} \Bigg)$,
+
+which is slightly easier to interpret. It says that we definitely accept proposals when we move to regions of higher density, i.e. when $p(\theta^* \, \vert \, y) > p(\theta_{t-1} \, \vert \, y)$. However, if  $p(\theta^* \, \vert \, y) < p(\theta_{t-1} \, \vert \, y)$, there is still some probability that we will move there regardless. This is important if we want to sample from the whole posterior.
+
+**Why does this work?** If you are confused, that's normal. For instance, why do we use the target distribution in the expressions above when we have said that it is unknown? Consider the ratio 
+
+$\dfrac{p(\theta^* \, \vert\,y)}{p(\theta \, \vert\, y)} = \dfrac{\dfrac{p(\theta^*) p(y\, \vert\,\theta^*)}{p(y)}}{\dfrac{p(\theta) p(y\, \vert\,\theta)}{p(y)}} = \dfrac{p(\theta^*) p(y\, \vert\,\theta^*)}{p(\theta) p(y\, \vert\,\theta)} = \dfrac{\tilde{p}(\theta^* \, \vert\,y)}{\tilde{p}(\theta \, \vert\, y)}$,
+
+where $\tilde{p}(\theta \, \vert \, y) \propto p(\theta \, \vert \,y)$. This shows that we only need an expression that is proportional to the posterior density. We know that this is the prior times the likelihood. The problematic normalising constant cancels out.
+
+Secondly, how do we know that the sequence of parameters that result from the MH algortithm are in fact draws from the true posterior distribution? We can show this (adapted from [1] p. 856) by considering the transition probabilities of the Markov chain defined by the MH algorithm:
+
+$P(X_t = \theta^* \,\vert\, X_{t-1} = \theta_{t-1}) = \begin{cases}q(\theta^* \, \vert \, \theta_{t-1})r_{\theta^*}, &\text{if}\ \theta^* \neq \theta_{t-1} \\ q(\theta_{t-1} | \theta_{t-1}) + \sum_{\theta^* \neq \theta_{t-1}} q(\theta^* \,\vert\, \theta_{t-1})[1 - r_{\theta^*}], & \text{o.w.} \end{cases}$ 
+
+Let's decipher this. Consider the following cases
+
+1. We make the transition $\theta_{t-1} \rightarrow \theta^*$. This means we must have proposed $\theta^*$ and it was accepted with probability $r_{\theta^*}$.
+
+2. We stay at $\theta_{t-1}$. This means one of two things:
+
+   a. We proposed $\theta_{t-1}$ (which means that $r_{\theta_{t-1}} = 1$ and we accept), or
+
+   b. We proposed $\theta^*$ and it was rejected with probability $1 - r_{\theta^*}$.
+
+Recall that a Markov chain has a unique stationary distribution $\pi$ if it satisfies the detailed balance equations (here we adjust the notation to match the MH-setting):
+
+$\pi_{\theta_{t-1}}P(X_t = \theta^* \,\vert\, X_{t-1} = \theta_{t-1}) = \pi_{\theta^*}P(X_t = \theta_{t-1} \,\vert\, X_{t-1} = \theta^*)$.
+
+Now, consider two states $\theta_{t-1}$ and $\theta^*$. Ignoring ties, either
+
+1. $p(\theta^* \, \vert \, y)q(\theta_{t-1} \, \vert \, \theta^*) > p(\theta_{t-1} \, \vert \, y)q(\theta^* \, \vert \, \theta_{t-1})$, or
+
+2. $p(\theta^* \, \vert \, y)q(\theta_{t-1} \, \vert \, \theta^*) < p(\theta_{t-1} \, \vert \, y)q(\theta^* \, \vert \, \theta_{t-1})$.
+
+Without loss of generality, assume situation 2. This means
+
+$\alpha_{\theta^*}= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)} \cdot \dfrac{q(\theta_{t-1} \, \vert \, \theta^*)}{q(\theta^* \, \vert \, \theta_{t-1})} < 1 \quad \Rightarrow \quad r_{\theta^*} = \alpha_{\theta^*}$.
+
+To move from $\theta_{t-1} \rightarrow \theta^*$, we need to propose $\theta^*$ and accept it with probability $r_{\theta^*}$:
+
+$\begin{align*}P(X_t = \theta^* \,\vert\, X_{t-1} = \theta_{t-1}) &= q(\theta^* \, \vert \, \theta_{t-1})r_{\theta^*} \\ &= q(\theta^* \, \vert \, \theta_{t-1})\dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)} \cdot \dfrac{q(\theta_{t-1} \, \vert \, \theta^*)}{q(\theta^* \, \vert \, \theta_{t-1})} \\ &= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)}q(\theta_{t-1} \, \vert \, \theta^*) \end{align*}$
+
+which gives
+
+(1) $p(\theta_{t-1} \, \vert \, y)P(X_t = \theta^* \,\vert\, X_{t-1} = \theta_{t-1}) = p(\theta^* \, \vert \, y)q(\theta_{t-1} \, \vert \, \theta^*)$.
+
+The backwards probability is
+
+(2) $P(X_t = \theta_{t-1} \,\vert\, X_{t-1} = \theta^*) = q(\theta_{t-1} \, \vert \, \theta^*)$,
+
+since in this case $r_{\theta_{t-1}} = 1$ provided $p(\theta^* \, \vert \, y)q(\theta_{t-1} \, \vert \, \theta^*) < p(\theta_{t-1} \, \vert \, y)q(\theta^* \, \vert \, \theta_{t-1})$ as per our assumption.
+
+Inserting (2) into (1) gives
+
+$p(\theta_{t-1} \, \vert \, y)P(X_t = \theta^* \,\vert\, X_{t-1} = \theta_{t-1}) = p(\theta^* \, \vert \, y)P(X_t = \theta_{t-1} \,\vert\, X_{t-1} = \theta^*)$,
+
+which satisfies detailed balance wrt. $p(\theta \,\vert\, y)$, and we have guaranteed that the stationary distribution of the Markov chain is the posterior target density of interest.
 
 ## Resources
 
