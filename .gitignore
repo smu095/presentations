@@ -6,6 +6,7 @@
 
 # Ignoring LaTeX files
 /mcmc-pymc3-101/slides/*
+!/mcmc-pymc3-101/slides/figs
 !/mcmc-pymc3-101/slides/*.tex
 !/mcmc-pymc3-101/slides/*.pdf
 
