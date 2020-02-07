@@ -48,6 +48,7 @@
 \usepackage[sharp]{easylist}
 \usepackage{multicol}
 \usepackage{tikz-cd}
+\usepackage{xcolor}
 
 
 %gets rid of bottom navigation bars
@@ -120,14 +121,55 @@
 \end{frame}
 
 % -------------------------------------------------------------------------
-\section{Motivation}
-\begin{frame}[fragile]{A slide with bullet points}
+\section{Introduction}
+\begin{frame}[fragile]{Road map}
 	\begin{easylist}[itemize]
-		\ListProperties(Space=\listSpace, Space*=\listSpace)
-		# Represent Abelian groups on the computer
-		# Compute on Abelian groups
-		# Solve equations, factor group homomorphisms
+		\ListProperties(Space=\listSpace, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Theory
+		## The basics of Bayesianism
+		## Markov chain Monte Carlo methods (MCMC)
+		# Practice
+		## Probabilistic programming with PyMC3
 	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{What is Bayesian data analysis?}
+	``A Bayesian is one who, vaguely expecting a horse, and catching a glimpse of a donkey, strongly believes he has seen a mule.''
+\end{frame}
+
+\begin{frame}[fragile]{What is Bayesian data analysis?}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			\begin{easylist}
+					\ListProperties(Space=\listSpace, Space*=\listSpace)
+					# Richard McElreath: ``Bayesian inference is just counting.''  
+					# Count all the ways observed data could have arisen according to assumptions
+					# Assumptions that can arise in more ways are more consistent with the data, and therefore more plausible
+			\end{easylist}
+		\end{column}
+	\begin{column}{0.3\textwidth}
+		\includegraphics[height=0.7\textheight]{figs/rethinking3.jpg}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
+		\begin{columns}
+		\begin{column}{0.7\linewidth}
+				\begin{easylist}
+				\ListProperties(Space=\listSpace, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# Frequentist statistics
+				## Probability defined as the limiting frequency at which events occur
+				## Uncertainty arises from sampling variation
+				# Bayesian statistics
+				## Frequency and probability are different things
+				## Uncertainty arises from our ignorance of the true state of the world
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\includegraphics[height=0.7\textheight]{figs/relevant_xkcd.png}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{A slide with a theorem and a proof.}
