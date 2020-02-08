@@ -48,6 +48,7 @@
 \usepackage[sharp]{easylist}
 \usepackage{multicol}
 \usepackage{tikz-cd}
+\usepackage{xcolor}
 
 
 %gets rid of bottom navigation bars
@@ -120,15 +121,112 @@
 \end{frame}
 
 % -------------------------------------------------------------------------
-\section{Motivation}
-\begin{frame}[fragile]{A slide with bullet points}
+\section{Introduction}
+\begin{frame}[fragile]{Road map}
 	\begin{easylist}[itemize]
-		\ListProperties(Space=\listSpace, Space*=\listSpace)
-		# Represent Abelian groups on the computer
-		# Compute on Abelian groups
-		# Solve equations, factor group homomorphisms
+		\ListProperties(Space=\listSpace, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Theory
+		## The basics of Bayesianism
+		## Markov chain Monte Carlo methods (MCMC)
+		# Practice
+		## Probabilistic programming with PyMC3
 	\end{easylist}
 \end{frame}
+
+\begin{frame}[fragile]{What is Bayesian data analysis?}
+	``A Bayesian is one who, vaguely expecting a horse, and catching a glimpse of a donkey, strongly believes he has seen a mule.''
+\end{frame}
+
+\begin{frame}[fragile]{What is Bayesian data analysis?}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			\begin{easylist}
+					\ListProperties(Space=\listSpace, Space*=\listSpace)
+					# Richard McElreath: ``Bayesian inference is just counting.''  
+					# Count all the ways observed data could have arisen according to assumptions
+					# Assumptions that can arise in more ways are more consistent with the data, and therefore more plausible
+			\end{easylist}
+		\end{column}
+	\begin{column}{0.3\textwidth}
+		\includegraphics[height=0.7\textheight]{figs/rethinking3.jpg}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
+		\begin{columns}
+		\begin{column}{0.7\linewidth}
+				\begin{easylist}
+				\ListProperties(Space=\listSpace, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# Frequentist statistics
+				## Probability defined as the limiting frequency at which events occur
+				## Uncertainty arises from sampling variation
+				# Bayesian statistics
+				## Frequency and probability are different things
+				## Uncertainty arises from our ignorance of the true state of the world
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\includegraphics[height=0.7\textheight]{figs/relevant_xkcd.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Bayesian Analysis}
+\begin{columns}
+\begin{column}{0.5\linewidth}
+The prior distribution combined with likelihood distribution (observed data) equals posterior distribution
+\end{column}
+\begin{column}{0.5\linewidth}
+\includegraphics[scale=0.17]{figs/prior_likelihood_posterior_example.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}{Bayesian Analysis}
+\begin{columns}
+\begin{column}{0.5\linewidth}
+How do we find the posterior when the prior and likelihood distribution are complicated
+\end{column}
+\begin{column}{0.5\linewidth}
+\includegraphics[scale=0.2]{figs/nasty_prior_posterior_example.png}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Monte Carlo Simulations}
+Simple definition
+\begin{itemize}
+\item Monte Carlo simulations are just a way of estimating a fixed parameter by repeatedly generating random numbers. 
+\end{itemize}
+The basis of Monte Carlo simulations is the Law of Large Numbers:
+\begin{itemize}
+\item As the number of identically distributed, randomly generated variables increases, their sample mean (average) approaches their theoretical mean.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Monte Carlo Simulations - Example}
+Use case: Calculate the area of this bat sign:
+\includegraphics[scale=0.3]{figs/bat_signal.png}
+\end{frame}
+%https://towardsdatascience.com/a-zero-math-introduction-to-markov-chain-monte-carlo-methods-dcba889e0c50
+
+\begin{frame}[fragile]{Monte Carlo Simulations - Example}
+\begin{equation} \textrm{area of bat sign} = \textrm{area of rectangle} \times \frac{\textrm{green dots}}{\textrm{all dots}}\end{equation}
+\includegraphics[scale=0.3]{figs/bat_signal_mcs.png}
+\end{frame}
+
+
+\begin{frame}[fragile]{Markov Chain}
+\begin{itemize}
+\item Sequences of events that have a probabilistic relation to one another
+\item Markov chains are memoryless. All we need to calculate the next event are available in the current state
+% Example model a persons movement in a house. Momorylessness = Markov property
+\end{itemize}
+\end{frame}
+
+
 
 \begin{frame}[fragile]{A slide with a theorem and a proof.}
 \begin{theorem}[Integral]
