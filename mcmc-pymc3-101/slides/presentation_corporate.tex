@@ -124,7 +124,7 @@
 \section{Introduction}
 \begin{frame}[fragile]{Road map}
 	\begin{easylist}[itemize]
-		\ListProperties(Space=\listSpace, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
 		# Theory
 		## The basics of Bayesianism
 		## Markov chain Monte Carlo methods (MCMC)
@@ -141,7 +141,7 @@
 	\begin{columns}
 		\begin{column}{0.7\linewidth}
 			\begin{easylist}
-					\ListProperties(Space=\listSpace, Space*=\listSpace)
+					\ListProperties(Space=\listSpace, Margin1=1ex, Space*=\listSpace)
 					# Richard McElreath: ``Bayesian inference is just counting.''  
 					# Count all the ways observed data could have arisen according to assumptions
 					# Assumptions that can arise in more ways are more consistent with the data, and therefore more plausible
@@ -154,19 +154,19 @@
 \end{frame}
 
 \begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
-		\begin{columns}
+	\begin{columns}
 		\begin{column}{0.7\linewidth}
-				\begin{easylist}
-				\ListProperties(Space=\listSpace, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
-				# Frequentist statistics
-				## Probability defined as the limiting frequency at which events occur
-				## Uncertainty arises from sampling variation
-				# Bayesian statistics
-				## Frequency and probability are different things
-				## Uncertainty arises from our ignorance of the true state of the world
+			\begin{easylist}
+			\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+			# Frequentist statistics
+			## Probability defined as the limiting frequency at which events occur
+			## Uncertainty arises from sampling variation
+			# Bayesian statistics
+			## Frequency and probability are different things
+			## Uncertainty arises from our ignorance of the true state of the world
 			\end{easylist}
 		\end{column}
-		\begin{column}{0.3\textwidth}
+			\begin{column}{0.3\textwidth}
 			\includegraphics[height=0.7\textheight]{figs/relevant_xkcd.png}
 		\end{column}
 	\end{columns}
@@ -177,7 +177,7 @@
 \begin{column}{0.5\linewidth}
 The prior distribution combined with likelihood distribution (observed data) equals posterior distribution
 \begin{equation}
-P(\theta |D,M)= \frac{P(D|\theta, M)P(\theta|M)}{P(D|M)}
+p(\theta \vert \, y)= \frac{p(y \, \vert \theta)p(\theta)}{\int p(y \, \vert \theta)p(\theta) \, d\theta}
 \end{equation}
 \begin{equation}
 \mathcal{P} \propto \mathcal{L}\Pi
@@ -200,27 +200,34 @@ How do we find the posterior when the prior and likelihood distribution are comp
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Monte Carlo Simulations}
-Simple definition
-\begin{itemize}
-\item Monte Carlo simulations are just a way of estimating a fixed parameter by repeatedly generating random numbers. 
-\end{itemize}
-The basis of Monte Carlo simulations is the Law of Large Numbers:
-\begin{itemize}
-\item As the number of identically distributed, randomly generated variables increases, their sample mean (average) approaches their theoretical mean.
-\end{itemize}
+\begin{frame}[fragile]{Monte Carlo simulations}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Monte Carlo (MC) simulations are just a way to approximate numerical results using repeated random sampling
+		# Main idea:
+		## Generate $N$ samples $x_1, \ldots, x_N$ from $p(x)$, approximate $f$ using the empirical distribution of $\{f(x_n)\}_{n=1}^N$
+		## $\mathbb{E}\left[ \, f \, \right] = \int f(x)p(x) \,dx \approx \frac{1}{N} \sum_{n=1}^{N} f(x_n) = \hat{f}$ 
+		# MC estimates converge thanks to Law of Large Numbers
+		## $(\hat{f} - f) \rightarrow \mathcal{N}\big(0, \frac{\sigma^2}{N}\big)$ as $N \rightarrow \infty$
+	\end{easylist}
 \end{frame}
 
-
-\begin{frame}[fragile]{Monte Carlo Simulations - Example}
-Use case: Calculate the area of this bat sign:
-\includegraphics[scale=0.3]{figs/bat_signal.png}
+\begin{frame}[fragile]{Practical example}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Calculate difficult integrals, such as the area of the Batman sign
+	\end{easylist}
+	\includegraphics[scale=0.3]{figs/bat_signal.png}
 \end{frame}
 %https://towardsdatascience.com/a-zero-math-introduction-to-markov-chain-monte-carlo-methods-dcba889e0c50
 
 \begin{frame}[fragile]{Monte Carlo Simulations - Example}
-\begin{equation} \textrm{area of bat sign} = \textrm{area of rectangle} \times \frac{\textrm{green dots}}{\textrm{all dots}}\end{equation}
-\includegraphics[scale=0.3]{figs/bat_signal_mcs.png}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Repeatedly sample $(u_1, u_2) \sim \text{Uniform}(-\frac{1}{2}, \frac{1}{2})$
+		# Calculate area $A$ of Batman sign as $A = \textrm{area of rectangle} \times \frac{\textrm{green dots}}{\textrm{all dots}}$
+	\end{easylist}
+	\includegraphics[scale=0.3]{figs/bat_signal_mcs.png}
 \end{frame}
 
 
