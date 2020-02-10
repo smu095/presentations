@@ -8,7 +8,6 @@
 /mcmc-pymc3-101/slides/*
 !/mcmc-pymc3-101/slides/figs
 !/mcmc-pymc3-101/slides/*.tex
-!/mcmc-pymc3-101/slides/*.pdf
 
 /mcmc-pymc3-101/docs/*
 !/mcmc-pymc3-101/docs/*.tex
