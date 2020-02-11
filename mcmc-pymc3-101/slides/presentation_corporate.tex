@@ -208,7 +208,7 @@ How do we find the posterior when the prior and likelihood distribution are comp
 		## Generate $N$ samples $x_1, \ldots, x_N$ from $p(x)$, approximate $f$ using the empirical distribution of $\{f(x_n)\}_{n=1}^N$
 		## $\mathbb{E}\left[ \, f \, \right] = \int f(x)p(x) \,dx \approx \frac{1}{N} \sum_{n=1}^{N} f(x_n) = \hat{f}$ 
 		# MC estimates converge thanks to Law of Large Numbers
-		## $(\hat{f} - f) \rightarrow \mathcal{N}\big(0, \frac{\sigma^2}{N}\big)$ as $N \rightarrow \infty$
+		## $(\hat{f} - \mathbb{E}\left[ \, f \, \right]) \rightarrow \mathcal{N}\Big(0, \sqrt{\frac{Var\left[\,f\,\right]}{N_{eff}}}\Big)$ as $N \rightarrow \infty$
 	\end{easylist}
 \end{frame}
 
@@ -231,15 +231,33 @@ How do we find the posterior when the prior and likelihood distribution are comp
 \end{frame}
 
 
-\begin{frame}[fragile]{Markov Chain}
-\begin{itemize}
-\item Sequences of events that have a probabilistic relation to one another
-\item Markov chains are memoryless. All we need to calculate the next event are available in the current state
-% Example model a persons movement in a house. Momorylessness = Markov property
-\end{itemize}
+\begin{frame}[fragile]{Markov chains}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# A Markov chain is a way of defining a joint probability distribution over sequences
+		# Used to model events in discrete and continuous time (manufacturing processes, social mobility, queuing systems, etc.)
+		# Typically we are interested in the long-term distribution of being in a certain state
+	\end{easylist}
 \end{frame}
 
-\begin{frame}{Bayesian MCMC}
+\begin{frame}[fragile]{Properties of a Markov chain}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# TODO
+		# Memorylessness
+		# Ergodicity in simple words
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Markov chain Monte Carlo methods}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# General idea
+		# More details in PDF in repo
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Algorithmic overview of MCMC}
 Steps in MCMC
 \begin{itemize}
 \item Define function for $\mathcal{L}$, $\Pi$ and thus $\mathcal{P}$
@@ -264,10 +282,21 @@ How to make a jump in $\theta$
 \begin{equation}
 \theta_{new} = \theta_i + \mathcal{N}(0, \Delta\theta)
 \end{equation}
-
 We call $\Delta\theta$ for the jump scale. Normally this must be tuned manually for every dimension. A rule of thumb is that we want a jump scale that gives a reasonable acceptance rate.  
 \end{frame}
 
+
+\begin{frame}[fragile]{Towards a Bayesian workflow}
+	Very general approach:
+	\begin{easylist}[enumerate]
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Design the model (tell the data story)
+		# Condition on the data (update step)
+		# Evaluate the model (critique), and either
+		## be happy, it worked as planned, or
+		## return to step 1
+	\end{easylist}
+\end{frame}
 
 \begin{frame}[fragile]{A slide with a theorem and a proof.}
 \begin{theorem}[Integral]
