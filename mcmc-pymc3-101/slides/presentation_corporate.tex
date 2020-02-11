@@ -175,21 +175,24 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Bayesian Analysis}
-\begin{columns}
-\begin{column}{0.5\linewidth}
-The prior distribution combined with likelihood distribution (observed data) equals posterior distribution
-\begin{equation}
-p(\theta \vert \, y)= \frac{p(y \, \vert \theta)p(\theta)}{\int p(y \, \vert \theta)p(\theta) \, d\theta}
-\end{equation}
-\begin{equation}
-\mathcal{P} \propto \mathcal{L}\Pi
-\end{equation}
-\end{column}
-\begin{column}{0.5\linewidth}
-\includegraphics[scale=0.17]{figs/prior_likelihood_posterior_example.png}
-\end{column}
-\end{columns}
+\begin{frame}[fragile]{Priors, posteriors and likelihoods}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			The prior distribution combined with likelihood distribution (observed data) equals posterior distribution
+			\begin{equation*}
+				\begin{split}
+			 		p(\theta \vert \, y) & =  \frac{p(y \, \vert \theta)p(\theta)}{\int p(y \, \vert \theta)p(\theta) \, d\theta} \\
+			 		& \propto p(y \, \vert \theta)p(\theta)
+				\end{split}
+			\end{equation*}
+			\begin{equation*}
+				posterior \propto likelihood \cdot prior
+			\end{equation*}
+		\end{column}
+		\begin{column}{0.5\linewidth}
+			\includegraphics[scale=0.17]{figs/prior_likelihood_posterior_example.png}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}{Bayesian Analysis}
@@ -265,16 +268,16 @@ How do we find the posterior when the prior and likelihood distribution are comp
 \begin{frame}[fragile]{Algorithmic view of MCMC}
 	\begin{easylist}[enumerate]
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
-		# Start at your current position.
-		# Propose a new position.
-		# Decide whether or not to make the transition from your current position to the new position.
-		## If the proposal is rejected: remain in your current position, increment $t$ and return to step 1.
-		## If the proposal is accepted: move to the new position, increment $t$ and return to step 1.
-		# After a large number of iterations, return the sequence of samples positions. These are your samples from the posterior distribution.
+		# Start at current position.
+		# Propose new position.
+		# Accept/reject new position based on position's adherence to data and prior distributions.
+		## If reject: Remain in your current position, return to step 1.
+		## If accept: Move to the new position, return to step 1.
+		# After large number of iterations, return sequence of accepted positions.
 	\end{easylist}
 \end{frame}
 
-\begin{frame}{Sampler}
+\begin{frame}{Metropolis algorithm}
 Metropolis rule
 \begin{itemize}
 \item If $\mathcal{P}_{new}>\mathcal{P}_{i}$ accept the jump so $\theta_{i+1}=\theta_i$
