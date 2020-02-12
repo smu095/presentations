@@ -25,6 +25,7 @@
 \usepackage[scaled=0.9]{helvet}
 \usepackage{courier}
 
+
 \title{An introduction to probabilistic programming with PyMC3}
 %\subtitle{Presentation subtitle}
 %\institute{Inmeta}
@@ -49,6 +50,9 @@
 \usepackage{multicol}
 \usepackage{tikz-cd}
 \usepackage{xcolor}
+\usepackage{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{float}
 
 
 %gets rid of bottom navigation bars
@@ -252,6 +256,7 @@ How do we find the posterior when the prior and likelihood distribution are comp
 		# Memoryless (Markov property): $P(X_t\,|\,X_{t-1}, X_{t-2}, \ldots, X_1) = P(X_t\,|\,X_{t-1})$
 		# Under certain conditions, guaranteed to have a unique, limiting distribution (aka. stationary distribution)
 		## Long run proportion of time spent in each state
+		## For more details, check \footnotesize\texttt{https://github.com/smu095/presentations/}
 	\end{easylist}
 \end{frame}
 
@@ -277,22 +282,17 @@ How do we find the posterior when the prior and likelihood distribution are comp
 	\end{easylist}
 \end{frame}
 
-\begin{frame}{Metropolis algorithm}
-Metropolis rule
-\begin{itemize}
-\item If $\mathcal{P}_{new}>\mathcal{P}_{i}$ accept the jump so $\theta_{i+1}=\theta_i$
-\item If $\mathcal{P}_{new}<\mathcal{P}_{i}$ accept the jump with probability $\frac{\mathcal{P}_{new}}{\mathcal{P}_i}$
-\end{itemize}
+\begin{frame}[fragile]{Metropolis algorithm}
+	\begin{easylist}[enumerate]
+		# Start at some initial parameter value $\theta_0$
+		# for $t=1$ to $T$:
+		## Sample $\theta^*$ from a proposal distribution $q(\theta^* \, \vert \, \theta_{t-1})$
+		## Draw $u \sim \mathcal{U}(0, 1)$
+		## Evaluate $\alpha_{\theta^*}= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)}$.\\
+		## Set acceptance probability to $r_{\theta^*}= \text{min}(1, \alpha_{\theta^*})$.\\
+		## Set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < r \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
+	\end{easylist}
 \end{frame}
-
-\begin{frame}{Jump in $\theta$}
-How to make a jump in $\theta$
-\begin{equation}
-\theta_{new} = \theta_i + \mathcal{N}(0, \Delta\theta)
-\end{equation}
-We call $\Delta\theta$ for the jump scale. Normally this must be tuned manually for every dimension. A rule of thumb is that we want a jump scale that gives a reasonable acceptance rate.  
-\end{frame}
-
 
 \begin{frame}[fragile]{Towards a Bayesian workflow}
 	Very general approach:
