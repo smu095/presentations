@@ -242,7 +242,7 @@ How do we find the posterior when the prior and likelihood distribution are comp
 		## Generate $N$ samples $x_1, \ldots, x_N$ from $p(x)$, approximate $f$ using the empirical distribution of $\{f(x_n)\}_{n=1}^N$
 		## $\mathbb{E}\left[ \, f \, \right] = \int f(x)p(x) \,dx \approx \frac{1}{N} \sum_{n=1}^{N} f(x_n) = \hat{f}$ 
 		# MC estimates converge thanks to Law of Large Numbers
-		## $(\hat{f} - \mathbb{E}\left[ \, f \, \right]) \rightarrow \mathcal{N}\Big(0, \sqrt{\frac{Var\left[\,f\,\right]}{N_{eff}}}\Big)$ as $N \rightarrow \infty$
+		## $(\hat{f} - \mathbb{E}\left[ \, f \, \right]) \rightarrow \mathcal{N}\Big(0, \frac{Var\left[\,f\,\right]}{N_{eff}}\Big)$ as $N \rightarrow \infty$
 	\end{easylist}
 \end{frame}
 
