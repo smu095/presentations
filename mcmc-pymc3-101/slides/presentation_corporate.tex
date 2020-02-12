@@ -117,7 +117,7 @@
 \maketitle
 \addtobeamertemplate{frametitle}{}{%
 \begin{tikzpicture}[remember picture,overlay]
-  	\node[anchor=south west,yshift=0pt, xshift=4pt, scale=0.7] at (current page.south west) {\includegraphics[height=0.5cm]{figs/inmeta.png}};
+  	\node[anchor=south west,yshift=0pt, xshift=4pt, scale=0.7] at (current page.south west) {\includegraphics[height=0.3cm]{figs/inmeta.png}};
 \end{tikzpicture}}
 
 % -------------------------------------------------------------------------
@@ -242,15 +242,17 @@ How do we find the posterior when the prior and likelihood distribution are comp
 
 
 \begin{frame}[fragile]{Markov chains}
+	\includegraphics[scale=.8]{figs/irreducible.pdf}
 	\begin{easylist}
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
-		# A Markov chain is a way of defining a joint probability distribution over sequences
-		# Used to model events in discrete and continuous time (manufacturing processes, social mobility, queuing systems, etc.)
-		# Typically we are interested in the long-term distribution of being in a certain state
+		# A Markov chain defines a joint probability distribution over sequences
+		# Used to model events in discrete and continuous time (manufacturing processes, queuing systems, etc.)
+		# Typically interested in the long-term distribution of being in a certain state
 	\end{easylist}
 \end{frame}
 
 \begin{frame}[fragile]{Properties of a Markov chain}
+	\includegraphics[scale=.8]{figs/irreducible.pdf}
 	\begin{easylist}
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
 		# Memoryless (Markov property): $P(X_t\,|\,X_{t-1}, X_{t-2}, \ldots, X_1) = P(X_t\,|\,X_{t-1})$
