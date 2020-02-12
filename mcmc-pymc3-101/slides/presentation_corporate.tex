@@ -54,6 +54,7 @@
 \usepackage{algorithmic}
 \usepackage{float}
 \usepackage{listings}
+\usepackage{minted}
 
 %gets rid of bottom navigation bars
 \setbeamertemplate{footline}[frame number]{}
@@ -187,7 +188,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{The Garden of Forking Data, cont'd}
-	\lstinputlisting[language=Python, basicstyle=\tiny]{../marbles.py}
+	\inputminted[fontsize=\tiny]{python}{../marbles.py}
 \end{frame}
 
 \begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
@@ -314,7 +315,7 @@ How do we find the posterior when the prior and likelihood distribution are comp
 \end{frame}
 
 \begin{frame}[fragile]{Metropolis in Python}
-	\lstinputlisting[language=Python, basicstyle=\tiny]{../metropolis.py}
+	\inputminted[fontsize=\tiny]{python}{../metropolis.py}
 \end{frame}
 
 \begin{frame}[fragile]{Towards a Bayesian workflow}
