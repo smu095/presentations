@@ -53,7 +53,7 @@
 \usepackage{algorithm2e}
 \usepackage{algorithmic}
 \usepackage{float}
-
+\usepackage{listings}
 
 %gets rid of bottom navigation bars
 \setbeamertemplate{footline}[frame number]{}
@@ -287,11 +287,15 @@ How do we find the posterior when the prior and likelihood distribution are comp
 		# Start at some initial parameter value $\theta_0$
 		# for $t=1$ to $T$:
 		## Sample $\theta^*$ from a proposal distribution $q(\theta^* \, \vert \, \theta_{t-1})$
-		## Draw $u \sim \mathcal{U}(0, 1)$
 		## Evaluate $\alpha_{\theta^*}= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)}$.\\
 		## Set acceptance probability to $r_{\theta^*}= \text{min}(1, \alpha_{\theta^*})$.\\
+		## Draw $u \sim \mathcal{U}(0, 1)$
 		## Set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < r \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
 	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Metropolis in Python}
+	\lstinputlisting[language=Python, basicstyle=\tiny]{../metropolis.py}
 \end{frame}
 
 \begin{frame}[fragile]{Towards a Bayesian workflow}
