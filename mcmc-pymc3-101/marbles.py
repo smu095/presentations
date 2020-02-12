@@ -9,7 +9,7 @@ theta = np.linspace(0, 1, num=5)
 uniform_prior = np.repeat(0.2, repeats=5)
 
 # Likelihood function
-likelihood = lambda p: p**2*(1 - p)
+likelihood = lambda p: p**2 * (1 - p)
 
 # Unnormalised posterior over theta
 # array([0., 0.009375, 0.025, 0.028125, 0.])
