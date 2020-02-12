@@ -166,6 +166,30 @@
 	\end{center}
 \end{frame}
 
+\begin{frame}[fragile]{Priors, posteriors and likelihoods}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			The prior distribution combined with likelihood distribution (observed data) equals posterior distribution
+			\begin{equation*}
+			\begin{split}
+			p(\theta \vert \, y) & =  \frac{p(y \, \vert \theta)p(\theta)}{\int p(y \, \vert \theta)p(\theta) \, d\theta} \\
+			& \propto p(y \, \vert \theta)p(\theta)
+			\end{split}
+			\end{equation*}
+			\begin{equation*}
+			posterior \propto likelihood \cdot prior
+			\end{equation*}
+		\end{column}
+		\begin{column}{0.5\linewidth}
+			\includegraphics[scale=0.17]{figs/prior_likelihood_posterior_example.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{The Garden of Forking Data, cont'd}
+	\lstinputlisting[language=Python, basicstyle=\tiny]{../marbles.py}
+\end{frame}
+
 \begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
 	\begin{columns}
 		\begin{column}{0.7\linewidth}
@@ -181,26 +205,6 @@
 		\end{column}
 			\begin{column}{0.3\textwidth}
 			\includegraphics[height=0.7\textheight]{figs/relevant_xkcd.png}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Priors, posteriors and likelihoods}
-	\begin{columns}
-		\begin{column}{0.5\linewidth}
-			The prior distribution combined with likelihood distribution (observed data) equals posterior distribution
-			\begin{equation*}
-				\begin{split}
-			 		p(\theta \vert \, y) & =  \frac{p(y \, \vert \theta)p(\theta)}{\int p(y \, \vert \theta)p(\theta) \, d\theta} \\
-			 		& \propto p(y \, \vert \theta)p(\theta)
-				\end{split}
-			\end{equation*}
-			\begin{equation*}
-				posterior \propto likelihood \cdot prior
-			\end{equation*}
-		\end{column}
-		\begin{column}{0.5\linewidth}
-			\includegraphics[scale=0.17]{figs/prior_likelihood_posterior_example.png}
 		\end{column}
 	\end{columns}
 \end{frame}
