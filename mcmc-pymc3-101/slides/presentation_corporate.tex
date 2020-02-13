@@ -161,32 +161,69 @@
 	\end{center}
 \end{frame}
 
+\begin{frame}[fragile]{Priors, posteriors and likelihoods}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			Prior $p(\theta)$: Encodes assumptions about $\theta$\\
+			Likelihood $p(y \, \vert \, \theta)$: How were the observed data generated? \\ 
+			Posterior $p(\theta \, \vert \, y)$: Assumptions about $\theta$ consistent with data
+			\begin{equation*}
+			\begin{split}
+			p(\theta \vert \, y) & =  \frac{p(\theta)p(y \, \vert \theta)}{\int p(y \, \vert \theta)p(\theta) \, d\theta} \\
+			& \propto p(\theta)p(y \, \vert \theta)
+			\end{split}
+			\end{equation*}
+			\begin{equation*}
+			\textcolor{red}{posterior} \propto  \textcolor{orange}{prior} \cdot \textcolor{blue}{likelihood}
+			\end{equation*}
+		\end{column}
+		\begin{column}{0.5\linewidth}
+			\includegraphics[scale=0.17]{figs/prior_likelihood_posterior_example.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Towards a Bayesian workflow}
+	\begin{easylist}[enumerate]
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
+		# Design the model (tell the data story)
+		## Describe data generating process: $p(y \, \vert \theta) = \theta^{blue} (1 - \theta)^{white}$
+		## Encode assumptions about parameters: $p(\theta) = \frac{1}{5}$
+		# Condition on the data (update step)
+		## $p(\theta \vert \, y) \propto p(\theta) p(y \, \vert \theta)$
+		# Evaluate the model (critique), and either
+		## be happy, it worked as planned, or
+		## return to step 1
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{The Garden of Forking Data, revisited}
+	\inputminted[fontsize=\tiny]{python}{../code/marbles.py}
+\end{frame}
+
+\begin{frame}[fragile]{The Garden of Forking Data, revisited}
+	\inputminted[fontsize=\tiny]{python}{../code/forking_data.py}
+\end{frame}
+
 \begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
 	\begin{columns}
 		\begin{column}{0.7\linewidth}
-			\begin{easylist}
+			\begin{easylist}[itemize]
 				\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
 				# Frequentist statistics
-				## Probability defined as the limiting frequency at which events occur
+				## Probability $=$ limiting frequency
 				## Uncertainty arises from sampling variation
 				# Bayesian statistics
-				## Frequency and probability are different things
-				## Uncertainty arises from our ignorance of the true state of the world
+				## Frequency $\neq$ probability
+				## Uncertainty arises from our ignorance
+				# Principled way to represent and take into account uncertainty
+				# Easily incorporates prior information
 			\end{easylist}
 		\end{column}
 		\begin{column}{0.3\textwidth}
 			\includegraphics[height=0.7\textheight]{figs/relevant_xkcd.png}
 		\end{column}
 	\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Why take the Bayesian approach?}
-	\begin{easylist}
-		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
-		# Statements about the world are made in terms of probability, conditional on observed data
-        # Principled way to represent and take into account uncertainty
-		# Easily incorporate prior information
-	\end{easylist}
 \end{frame}
 
 \begin{frame}[fragile]{But priors are subjective! Buu! Hiss!}
@@ -204,48 +241,6 @@
 
 \begin{frame}[fragile]{Telling the data story}
 	`` People think in terms of stories - thus the unreasonable power of the anecdote to drive decision-making, well-founded or not.''
-\end{frame}
-
-\begin{frame}[fragile]{Priors, posteriors and likelihoods}
-	\begin{columns}
-		\begin{column}{0.5\linewidth}
-			The prior distribution combined with likelihood distribution (observed data) equals posterior distribution
-			\begin{equation*}
-			\begin{split}
-			p(\theta \vert \, y) & =  \frac{p(y \, \vert \theta)p(\theta)}{\int p(y \, \vert \theta)p(\theta) \, d\theta} \\
-			& \propto p(y \, \vert \theta)p(\theta)
-			\end{split}
-			\end{equation*}
-			\begin{equation*}
-			\textcolor{red}{posterior} \propto \textcolor{blue}{likelihood} \cdot \textcolor{orange}{prior}
-			\end{equation*}
-		\end{column}
-		\begin{column}{0.5\linewidth}
-			\includegraphics[scale=0.17]{figs/prior_likelihood_posterior_example.png}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{Towards a Bayesian workflow}
-	Very general approach:
-	\begin{easylist}[enumerate]
-		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
-		# Design the model (tell the data story)
-		## Describe data generating process (likelihood $p(y \, \vert \theta)$)
-		## Encode assumptions about parameters (prior $p(\theta)$).
-		# Condition on the data (update step)
-		# Evaluate the model (critique), and either
-		## be happy, it worked as planned, or
-		## return to step 1
-	\end{easylist}
-\end{frame}
-
-\begin{frame}[fragile]{The Garden of Forking Data, revisited}
-	\inputminted[fontsize=\tiny]{python}{../code/marbles.py}
-\end{frame}
-
-\begin{frame}[fragile]{The Garden of Forking Data, revisited}
-	\inputminted[fontsize=\tiny]{python}{../code/forking_data.py}
 \end{frame}
 
 \begin{frame}{Bayesian analysis}
