@@ -161,6 +161,51 @@
 	\end{center}
 \end{frame}
 
+\begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			\begin{easylist}
+				\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# Frequentist statistics
+				## Probability defined as the limiting frequency at which events occur
+				## Uncertainty arises from sampling variation
+				# Bayesian statistics
+				## Frequency and probability are different things
+				## Uncertainty arises from our ignorance of the true state of the world
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\includegraphics[height=0.7\textheight]{figs/relevant_xkcd.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Why use Bayesian data analysis?}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Inferences stated in terms of probability, conditional on observed data
+        # Principled way to represent and take into account uncertainty
+		# Easily incorporate prior information
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{But priors are subjective! Buu! Hiss!}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Non-informative vs. informative priors
+		## Forking data example: $Uniform(0, 1)$ vs. $Uniform(\frac{1}{4}, \frac{3}{4})$
+		# Test your assumptions, e.g. using prior predictive checks
+		# More about priors:
+		## Gelman et al. (2017): \footnotesize\texttt{https://arxiv.org/abs/1708.07487}
+		## Bayesian Methods for Hackers: \footnotesize\texttt{https://tinyurl.com/v2yzyqv}	
+		# For more Bayesian challenges, see e.g. Gelman and Yao (2020): \footnotesize\texttt{https://tinyurl.com/sbr2tev}
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Telling the data story}
+	`` People think in terms of stories - thus the unreasonable power of the anecdote to drive decision-making, well-founded or not.''
+\end{frame}
+
 \begin{frame}[fragile]{Priors, posteriors and likelihoods}
 	\begin{columns}
 		\begin{column}{0.5\linewidth}
@@ -185,35 +230,8 @@
 	\inputminted[fontsize=\tiny]{python}{../code/marbles.py}
 \end{frame}
 
-\begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
-	\begin{columns}
-		\begin{column}{0.7\linewidth}
-			\begin{easylist}
-			\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
-			# Frequentist statistics
-			## Probability defined as the limiting frequency at which events occur
-			## Uncertainty arises from sampling variation
-			# Bayesian statistics
-			## Frequency and probability are different things
-			## Uncertainty arises from our ignorance of the true state of the world
-			\end{easylist}
-		\end{column}
-			\begin{column}{0.3\textwidth}
-			\includegraphics[height=0.7\textheight]{figs/relevant_xkcd.png}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}[fragile]{But priors are subjective! Buu! Hiss!}
-	\begin{easylist}
-		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
-		# Informative vs. non-informative priors
-		## Forking data example: $Uniform(0, 1)$ vs. $Uniform(\frac{1}{4}, \frac{3}{4})$
-		# Test your assumptions, e.g. using prior predictive checks
-		# More about priors:
-		## Andrew Gelman: \footnotesize\texttt{https://arxiv.org/abs/1708.07487}
-		## Bayesian Methods for Hackers: \footnotesize\texttt{https://tinyurl.com/v2yzyqv}	
-	\end{easylist}
+\begin{frame}[fragile]{The Garden of Forking Data, revisited}
+	\inputminted[fontsize=\tiny]{python}{../code/forking_data.py}
 \end{frame}
 
 \begin{frame}{Bayesian analysis}
@@ -225,6 +243,27 @@ How do we find the posterior when the prior and likelihood distribution are comp
 \includegraphics[scale=0.2]{figs/nasty_prior_posterior_example.png}
 \end{column}
 \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Markov chains}
+	\includegraphics[scale=.8]{figs/irreducible.pdf}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# A Markov chain defines a joint probability distribution over sequences
+		# Used to model events in discrete and continuous time (manufacturing processes, queuing systems, etc.)
+		# Typically interested in the long-term distribution of being in a certain state
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Properties of a Markov chain}
+	\includegraphics[scale=.8]{figs/irreducible.pdf}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Memoryless (Markov property): $P(X_t\,|\,X_{t-1}, X_{t-2}, \ldots, X_1) = P(X_t\,|\,X_{t-1})$
+		# Under certain conditions, guaranteed to have a unique, limiting distribution (aka. stationary distribution)
+		## Long run proportion of time spent in each state
+		## For more details, check \footnotesize\texttt{https://github.com/smu095/presentations/}
+	\end{easylist}
 \end{frame}
 
 \begin{frame}[fragile]{Monte Carlo simulations}
@@ -257,28 +296,6 @@ How do we find the posterior when the prior and likelihood distribution are comp
 	\includegraphics[scale=0.3]{figs/bat_signal_mcs.png}
 \end{frame}
 
-
-\begin{frame}[fragile]{Markov chains}
-	\includegraphics[scale=.8]{figs/irreducible.pdf}
-	\begin{easylist}
-		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
-		# A Markov chain defines a joint probability distribution over sequences
-		# Used to model events in discrete and continuous time (manufacturing processes, queuing systems, etc.)
-		# Typically interested in the long-term distribution of being in a certain state
-	\end{easylist}
-\end{frame}
-
-\begin{frame}[fragile]{Properties of a Markov chain}
-	\includegraphics[scale=.8]{figs/irreducible.pdf}
-	\begin{easylist}
-		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
-		# Memoryless (Markov property): $P(X_t\,|\,X_{t-1}, X_{t-2}, \ldots, X_1) = P(X_t\,|\,X_{t-1})$
-		# Under certain conditions, guaranteed to have a unique, limiting distribution (aka. stationary distribution)
-		## Long run proportion of time spent in each state
-		## For more details, check \footnotesize\texttt{https://github.com/smu095/presentations/}
-	\end{easylist}
-\end{frame}
-
 \begin{frame}[fragile]{Markov chain Monte Carlo methods}
 	\begin{easylist}
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
@@ -303,18 +320,23 @@ How do we find the posterior when the prior and likelihood distribution are comp
 
 \begin{frame}[fragile]{Metropolis algorithm}
 	\begin{easylist}[enumerate]
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
 		# Start at some initial parameter value $\theta_0$
 		# for $t=1$ to $T$:
 		## Sample $\theta^*$ from a proposal distribution $q(\theta^* \, \vert \, \theta_{t-1})$
 		## Evaluate $\alpha_{\theta^*}= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)}$.\\
 		## Set acceptance probability to $r_{\theta^*}= \text{min}(1, \alpha_{\theta^*})$.\\
-		## Draw $u \sim \mathcal{U}(0, 1)$
+		## Draw $u \sim Uniform(0, 1)$
 		## Set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < r \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
 	\end{easylist}
 \end{frame}
 
 \begin{frame}[fragile]{Metropolis in Python}
 	\inputminted[fontsize=\tiny]{python}{../code/metropolis.py}
+\end{frame}
+
+\begin{frame}[fragile]{Sampling algorithms}
+	content...
 \end{frame}
 
 \begin{frame}[fragile]{Towards a Bayesian workflow}
@@ -329,5 +351,21 @@ How do we find the posterior when the prior and likelihood distribution are comp
 	\end{easylist}
 \end{frame}
 
+\begin{frame}[fragile]{Probabilistic programming in Python}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			\begin{easylist}[itemize]
+				\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# PyStan
+				# PyMC3
+				# Pyro
+				# TensorFlow Probability
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{figs/logos.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
 
 \end{document}
