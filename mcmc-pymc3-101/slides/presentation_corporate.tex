@@ -231,6 +231,8 @@
 	\begin{easylist}[enumerate]
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
 		# Design the model (tell the data story)
+		## Describe data generating process (likelihood $p(y \, \vert \theta)$)
+		## Encode assumptions about parameters (prior $p(\theta)$).
 		# Condition on the data (update step)
 		# Evaluate the model (critique), and either
 		## be happy, it worked as planned, or
@@ -259,7 +261,7 @@ How do we find the posterior when the prior and likelihood distribution are comp
 
 \begin{frame}[fragile]{Markov chains}
 	\includegraphics[scale=.8]{figs/irreducible.pdf}
-	\begin{easylist}
+	\begin{easylist}[itemize]
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
 		# A Markov chain defines a joint probability distribution over sequences
 		# Used to model events in discrete and continuous time (manufacturing processes, queuing systems, etc.)
