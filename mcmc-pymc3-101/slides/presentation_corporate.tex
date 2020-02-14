@@ -215,7 +215,7 @@
 				## Uncertainty arises from sampling variation
 				# Bayesian statistics
 				## Frequency $\neq$ probability
-				## Uncertainty arises from our ignorance
+				## Uncertainty arises from ignorance
 				# Principled way to represent and take into account uncertainty
 				# Easily incorporates prior information
 			\end{easylist}
@@ -240,18 +240,24 @@
 \end{frame}
 
 \begin{frame}[fragile]{Telling the data story}
-	`` People think in terms of stories - thus the unreasonable power of the anecdote to drive decision-making, well-founded or not.''
+	`` People think in terms of stories - thus the unreasonable power of the anecdote to drive decision-making, well-founded or not. Existing analytics largely fails to provide this kind of story; instead, numbers seemingly appear out of thin air.'' \\
+	\flushright Beau Cronin, \textit{Why Probabilistic Programming Matters (2013)}
 \end{frame}
 
-\begin{frame}{Bayesian analysis}
-\begin{columns}
-\begin{column}{0.5\linewidth}
-How do we find the posterior when the prior and likelihood distribution are complicated
-\end{column}
-\begin{column}{0.5\linewidth}
-\includegraphics[scale=0.2]{figs/nasty_prior_posterior_example.png}
-\end{column}
-\end{columns}
+\begin{frame}[fragile]{How to sample from intractable posteriors?}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+		\begin{easylist}
+			\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+			# In textbooks, nice, we can sample directly from well-behaved, analytical posteriors
+			# In the real world, often impossible to sample directly from $p(\theta \vert y)$
+			# A general class of algorithms called \textbf{Markov chain Monte Carlo} let us approximately sample from posterior
+		\end{easylist}		
+		\end{column}
+		\begin{column}{0.5\linewidth}
+		\includegraphics[scale=0.2]{figs/nasty_prior_posterior_example.png}
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Markov chains}
@@ -344,6 +350,11 @@ How do we find the posterior when the prior and likelihood distribution are comp
 	\inputminted[fontsize=\tiny]{python}{../code/metropolis.py}
 \end{frame}
 
+\begin{frame}[fragile]{Metropolis in Python}
+	\center
+	\includegraphics[width=.7\textwidth]{figs/metropolis.png}
+\end{frame}
+
 \begin{frame}[fragile]{Sampling algorithms}
 	\begin{columns}
 		\begin{column}{0.5\linewidth}
@@ -373,6 +384,24 @@ How do we find the posterior when the prior and likelihood distribution are comp
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\includegraphics[width=\textwidth]{figs/logos.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{PyMC3}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			\begin{easylist}
+				\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# Python package for for fitting Bayesian models using modern methods (MCMC, variational inference, etc.)
+				# Well-documented, large suite of statistical models
+				# Highly flexible, but easy to use
+				# Uses Theano-backend (not good)
+				# PyMC4 in development, uses TensorFlow Probability-backend
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\includegraphics[width=\textwidth]{figs/pymc3.png}
 		\end{column}
 	\end{columns}
 \end{frame}
