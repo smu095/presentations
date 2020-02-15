@@ -3,6 +3,7 @@
 .mypy_cache
 .ipynb_checkpoints
 .vscode
+presentation_corporate.pdf
 
 # Ignoring LaTeX files
 /mcmc-pymc3-101/slides/*

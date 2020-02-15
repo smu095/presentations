@@ -59,7 +59,7 @@
 
 % Set up colors to be used
 \definecolor{purered}{RGB}{204,0,0}
-\definecolor{titlered}{RGB}{229,78,71}
+\definecolor{titlered}{RGB}{249,0,197}
 \definecolor{bggray}{RGB}{242,242,242}
 \definecolor{bggraydark}{RGB}{217,217,217}
 
@@ -92,6 +92,17 @@
 \setbeamercolor{section in head/foot}{bg=black}
 \setbeamercolor{author in head/foot}{bg=black}
 \setbeamercolor{date in head/foot}{fg=titlered}
+
+
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{itemize subsubitem}{fg=black}
+
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[circle]
+
+
 
 % Custom mathematics commands
 \DeclareMathOperator{\R}{\mathbb{R}}
@@ -209,6 +220,9 @@ The basis of Monte Carlo simulations is the Law of Large Numbers:
 \begin{itemize}
 \item As the number of identically distributed, randomly generated variables increases, their sample mean (average) approaches their theoretical mean.
 \end{itemize}
+\begin{equation}
+\frac{1}{N}\sum^{N}_{i=1}Z_i \rightarrow E[Z],\; N\rightarrow \infty
+\end{equation}
 \end{frame}
 
 
@@ -242,6 +256,18 @@ Steps in MCMC
 \item Keep jumping
 \item After doing many steps remove burn-in steps
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Priors}
+It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so. Mark Twain
+\end{frame}
+
+\begin{frame}{Likelihood}
+
+\end{frame}
+
+\begin{frame}{Posterior}
+
 \end{frame}
 
 \begin{frame}{Sampler}
