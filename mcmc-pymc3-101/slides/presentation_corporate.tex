@@ -194,13 +194,13 @@
 
 
 \begin{frame}[fragile]{Model}
-\begin{itemize}
-\item In the bayesian analysis we are trying to describe the process that generated the data. 
-\item We assume that the process can be expressed as a parametic model
-\end{itemize}
-\begin{equation*}
-\text{\text{M}}(input, \theta)
-\end{equation*}
+	\begin{itemize}
+		\item In the Bayesian analysis we are trying to describe the process that generated the data. 
+		\item We assume that the process can be expressed as a parametic model
+	\end{itemize}
+	\begin{equation*}
+		M(input, \theta)
+	\end{equation*}
 \end{frame}
 
 \begin{frame}[fragile]{Example}
@@ -261,7 +261,7 @@ What is the probability of my data given the model and parameters I've chosen?
 	\begin{easylist}[enumerate]
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
 		# Design the model (tell the data story)
-		## Describe data generating process: $p(y \, \vert \theta) = \theta^{blue} (1 - \theta)^{white}$
+		## Describe data generating process: $p(y \, \vert \theta) = \theta^{\sum_i{\mathbf{1}(y_i = 1)}} (1 - \theta)^{\sum_i{\mathbf{1}(y_i \neq 1)}}$
 		## Encode assumptions about parameters: $p(\theta) = \frac{1}{5}$
 		# Condition on the data (update step)
 		## $p(\theta \vert \, y) \propto p(\theta) p(y \, \vert \theta)$
