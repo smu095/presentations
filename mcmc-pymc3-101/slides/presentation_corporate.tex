@@ -228,16 +228,27 @@ Model:  \quad \quad  $ y_i = \theta  x_i + \epsilon_i, \quad \epsilon \sim N(0, 
 
 
 \begin{frame}[fragile]{Example: Likelihood}
-\begin{equation*}
-p(y|\theta) = \prod_{i=1}^n p(y_i|\theta)
-\end{equation*}
+\begin{columns}
+	\begin{column}{0.3\linewidth}
+		\begin{equation*}
+		p(y|\theta) = \prod_{i=1}^n p(y_i|\theta)
+		\end{equation*}
+		
+		\begin{equation*}
+		p(y_i|\theta) = N(y_i|\theta x_i, \sigma^2)
+		\end{equation*}
+	\end{column}
+		
+	\begin{column}{0.7\textwidth}
+		\begin{center}
+			\includegraphics[scale=0.7]{figs/linreg_likelihood_calc_example.png}
+		\end{center}
+	\end{column}
 
-\begin{equation*}
-p(y_i|\theta) = N(y_i|\theta x_i, \sigma^2)
-\end{equation*}
-   
+
+\end{columns}
   
-\vspace{1cm}
+\vspace{0.5cm}
 What is the probability of my data given the model and parameters I've chosen? 
 
 \end{frame}
@@ -245,15 +256,28 @@ What is the probability of my data given the model and parameters I've chosen?
 \begin{frame}[fragile]{Example: Size of dataset}
 
 \begin{columns}
-    \column{.5\linewidth}
+    \column{.4\linewidth}
         \begin{center}
-             \includegraphics[scale=0.6]{figs/linreg_N_points_example.png} 
+             \includegraphics[scale=0.5]{figs/linreg_N_points_example.png} 
         \end{center}
-    \column{.5\linewidth}
+    \column{.4\linewidth}
         \begin{center}
-            \includegraphics[scale=0.6]{figs/linreg_likelihood_N_example.png}
+            \includegraphics[scale=0.5]{figs/linreg_likelihood_N_example.png}
         \end{center}
 \end{columns}
+
+
+\begin{columns}
+    \column{.4\linewidth}
+        \begin{center}
+             \includegraphics[scale=0.43]{figs/linreg_likelihood_posterior_N100_example.png} 
+        \end{center}
+    \column{.4\linewidth}
+        \begin{center}
+            \includegraphics[scale=0.43]{figs/linreg_likelihood_posterior_N5_example.png}
+        \end{center}
+\end{columns}
+
 \end{frame}
 
 
