@@ -25,10 +25,12 @@
 \usepackage[scaled=0.9]{helvet}
 \usepackage{courier}
 
+
 \title{An introduction to probabilistic programming with PyMC3}
 %\subtitle{Presentation subtitle}
-%\institute{Inmeta}
-\date{\today}
+\institute{\includegraphics[width=.1\textwidth]{figs/inmeta.png}}
+%\titlegraphic{\includegraphics[width=.1\textwidth]{figs/inmeta.png}}
+\date[fontsize=\tiny]{\today}
 \author{Sean Meling Murray and Solveig Masvie}
 
 % -------------------------------------------------------------------------
@@ -48,7 +50,12 @@
 \usepackage[sharp]{easylist}
 \usepackage{multicol}
 \usepackage{tikz-cd}
-
+\usepackage{xcolor}
+\usepackage{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{minted}
 
 %gets rid of bottom navigation bars
 \setbeamertemplate{footline}[frame number]{}
@@ -58,7 +65,7 @@
 
 % Set up colors to be used
 \definecolor{purered}{RGB}{204,0,0}
-\definecolor{titlered}{RGB}{229,78,71}
+\definecolor{titlered}{RGB}{148,0,211}
 \definecolor{bggray}{RGB}{242,242,242}
 \definecolor{bggraydark}{RGB}{217,217,217}
 
@@ -92,12 +99,14 @@
 \setbeamercolor{author in head/foot}{bg=black}
 \setbeamercolor{date in head/foot}{fg=titlered}
 
-% Custom mathematics commands
-\DeclareMathOperator{\R}{\mathbb{R}}
-\DeclareMathOperator{\Q}{\mathbb{Q}}
-\DeclareMathOperator{\Z}{\mathbb{Z}}
-\DeclareMathOperator{\N}{\mathbb{N}}
-% \DeclareMathOperator{\C}{\mathbb{C}}
+% Itemize settings
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{itemize subsubitem}{fg=black}
+
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[circle]
 
 % Spacing for lsits
 \newcommand{\listSpace}{0.2em}
@@ -112,57 +121,387 @@
 \maketitle
 \addtobeamertemplate{frametitle}{}{%
 \begin{tikzpicture}[remember picture,overlay]
-  	\node[anchor=south west,yshift=0pt, xshift=4pt] at (current page.south west) {\includegraphics[height=0.5cm]{figs/inmeta.png}};
+  	\node[anchor=south west,yshift=0pt, xshift=4pt, scale=0.7] at (current page.south west) {\includegraphics[height=0.3cm]{figs/inmeta.png}};
 \end{tikzpicture}}
-  
-\begin{frame}{Table of contents}
-	\tableofcontents
-\end{frame}
 
 % -------------------------------------------------------------------------
-\section{Motivation}
-\begin{frame}[fragile]{A slide with bullet points}
-	\begin{easylist}[itemize]
-		\ListProperties(Space=\listSpace, Space*=\listSpace)
-		# Represent Abelian groups on the computer
-		# Compute on Abelian groups
-		# Solve equations, factor group homomorphisms
+\section{Introduction}
+\begin{frame}[fragile]{Road map}
+	\begin{easylist}[enumerate]
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
+		# Theory
+		## The basics of Bayesianism
+		## Markov chain Monte Carlo methods (MCMC)
+		# Practice
+		## Probabilistic programming with PyMC3
 	\end{easylist}
 \end{frame}
 
-\begin{frame}[fragile]{A slide with a theorem and a proof.}
-\begin{theorem}[Integral]
+\begin{frame}[fragile]{What is Bayesian data analysis?}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			``A Bayesian is one who, vaguely expecting a horse, and catching a glimpse of a donkey, strongly believes he has seen a mule.''
+		\end{column}
+		\begin{column}{0.3\linewidth}
+			\includegraphics[height=0.7\textheight]{figs/bayes.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{It's just counting!}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			\begin{easylist}[itemize]
+					\ListProperties(Space=\listSpace, Margin1=1ex, Space*=\listSpace)
+					# Richard McElreath: ``Bayesian inference is just counting.''  
+					# Count all the ways observed data could have arisen according to assumptions
+					# Assumptions that can arise in more ways are more consistent with the data, and therefore more plausible
+			\end{easylist}
+		\end{column}
+	\begin{column}{0.3\textwidth}
+		\includegraphics[height=0.7\textheight]{figs/rethinking3.jpg}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{The Garden of Forking Data}
+	\begin{center}
+		\includegraphics[height=0.8\textheight]{figs/forkingpaths.pdf}
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile]{Priors, posteriors and likelihoods}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			Prior $p(\theta)$: Encodes assumptions about $\theta$\\
+			Likelihood $p(y \, \vert \, \theta)$: How were the observed data generated? \\ 
+			Posterior $p(\theta \, \vert \, y)$: Assumptions about $\theta$ consistent with data
+			\begin{equation*}
+			\begin{split}
+			p(\theta \vert \, y) & =  \frac{p(\theta)p(y \, \vert \theta)}{\int p(y \, \vert \theta)p(\theta) \, d\theta} \\
+			& \propto p(\theta)p(y \, \vert \theta)
+			\end{split}
+			\end{equation*}
+			\begin{equation*}
+			\textcolor{red}{posterior} \propto  \textcolor{orange}{prior} \cdot \textcolor{blue}{likelihood}
+			\end{equation*}
+		\end{column}
+		\begin{column}{0.5\linewidth}
+			\includegraphics[scale=0.3]{figs/updating.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Model}
+	\begin{itemize}
+		\item In the Bayesian analysis we are trying to describe the process that generated the data. 
+		\item We assume that the process can be expressed as a parametic model
+	\end{itemize}
 	\begin{equation*}
-		\int_{a}^{b} f(x) \, dx = F(b) - F(a)
+		M(input, \theta)
 	\end{equation*}
-\end{theorem}
-\begin{proof}
-Here's the proof.
-\end{proof}
 \end{frame}
 
-% -------------------------------------------------------------------------
-\section{Bayesian statistics}
-\begin{frame}[fragile]{A slide with blocks}
-	\begin{block}{title of the bloc}
-	bloc text
-	\end{block}
-	
-	\begin{exampleblock}{title of the bloc}
-	bloc text
-	\end{exampleblock}
+\begin{frame}[fragile]{Example}
+The oh so boring linear regression example....
+\begin{center}
+\includegraphics[width=0.5\textwidth]{figs/linreg_example.png}
+\end{center}
+Model:  \quad \quad  $ y_i = \theta  x_i + \epsilon_i, \quad \epsilon \sim N(0, \sigma^2)$
 \end{frame}
 
-% -------------------------------------------------------------------------
-\section{Markov Chains}
-\begin{frame}[fragile]{A slide using pause}
-	\begin{easylist}[itemize]
-		\ListProperties(Space=\listSpace, Space*=\listSpace)
-		# Represent Abelian groups on the computer \pause
-		# Compute on Abelian groups \pause
-		# Solve equations, factor group homomorphisms
+
+
+\begin{frame}[fragile]{Example: Priors}
+\begin{columns}
+    \column{.5\linewidth}
+        \begin{center}
+            \includegraphics[scale=0.6]{figs/linreg_theta1_example.png}
+        \end{center}
+    \column{.5\linewidth}
+        \begin{center}
+             \includegraphics[scale=0.6]{figs/linreg_theta2_example.png} 
+        \end{center}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Example: Likelihood}
+\begin{columns}
+	\begin{column}{0.3\linewidth}
+		\begin{equation*}
+		p(y|\theta) = \prod_{i=1}^n p(y_i|\theta)
+		\end{equation*}
+		
+		\begin{equation*}
+		p(y_i|\theta) = N(y_i|\theta x_i, \sigma^2)
+		\end{equation*}
+	\end{column}
+		
+	\begin{column}{0.7\textwidth}
+		\begin{center}
+			\includegraphics[scale=0.7]{figs/linreg_likelihood_calc_example.png}
+		\end{center}
+	\end{column}
+
+
+\end{columns}
+  
+\vspace{0.5cm}
+What is the probability of my data given the model and parameters I've chosen? 
+
+\end{frame}
+
+\begin{frame}[fragile]{Example: Size of dataset}
+
+\begin{columns}
+    \column{.4\linewidth}
+        \begin{center}
+             \includegraphics[scale=0.5]{figs/linreg_N_points_example.png} 
+        \end{center}
+    \column{.4\linewidth}
+        \begin{center}
+            \includegraphics[scale=0.5]{figs/linreg_likelihood_N_example.png}
+        \end{center}
+\end{columns}
+
+
+\begin{columns}
+    \column{.4\linewidth}
+        \begin{center}
+             \includegraphics[scale=0.43]{figs/linreg_likelihood_posterior_N100_example.png} 
+        \end{center}
+    \column{.4\linewidth}
+        \begin{center}
+            \includegraphics[scale=0.43]{figs/linreg_likelihood_posterior_N5_example.png}
+        \end{center}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Towards a Bayesian workflow}
+	\begin{easylist}[enumerate]
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
+		# Design the model (tell the data story)
+		## Describe data generating process: $p(y \, \vert \theta) = \theta^{\sum_i{\mathbf{1}(y_i = 1)}} (1 - \theta)^{\sum_i{\mathbf{1}(y_i \neq 1)}}$
+		## Encode assumptions about parameters: $p(\theta) = \frac{1}{5}$
+		# Condition on the data (update step)
+		## $p(\theta \vert \, y) \propto p(\theta) p(y \, \vert \theta)$
+		# Evaluate the model (critique), and either
+		## be happy, it worked as planned, or
+		## return to step 1
 	\end{easylist}
 \end{frame}
 
+\begin{frame}[fragile]{The Garden of Forking Data, revisited}
+	\inputminted[fontsize=\tiny]{python}{../code/marbles.py}
+\end{frame}
+
+\begin{frame}[fragile]{The Garden of Forking Data, revisited}
+	\inputminted[fontsize=\tiny]{python}{../code/forking_data.py}
+\end{frame}
+
+\begin{frame}[fragile]{The Frequentist vs. Bayesian debacle}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			\begin{easylist}[itemize]
+				\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# Frequentist statistics
+				## Probability $=$ limiting frequency
+				## Uncertainty arises from sampling variation
+				# Bayesian statistics
+				## Frequency $\neq$ probability
+				## Uncertainty arises from ignorance
+				# Principled way to represent and take into account uncertainty
+				# Easily incorporates prior information
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\includegraphics[height=0.7\textheight]{figs/relevant_xkcd.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{But priors are subjective! Buu! Hiss!}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Non-informative vs. informative priors
+		## Forking data example: $Uniform(0, 1)$ vs. $Uniform(\frac{1}{4}, \frac{3}{4})$
+		# Test your assumptions, e.g. using prior predictive checks
+		# More about priors:
+		## Gelman et al. (2017): \footnotesize\texttt{https://arxiv.org/abs/1708.07487}
+		## Bayesian Methods for Hackers: \footnotesize\texttt{https://tinyurl.com/v2yzyqv}	
+		# For more Bayesian challenges, see e.g. Gelman and Yao (2020): \footnotesize\texttt{https://tinyurl.com/sbr2tev}
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Telling the data story}
+	`` People think in terms of stories - thus the unreasonable power of the anecdote to drive decision-making, well-founded or not. Existing analytics largely fails to provide this kind of story; instead, numbers seemingly appear out of thin air.'' \\
+	\flushright Beau Cronin, \textit{Why Probabilistic Programming Matters (2013)}
+\end{frame}
+
+\begin{frame}[fragile]{How to sample from intractable posteriors?}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+		\begin{easylist}
+			\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+			# In textbooks, nice, we can sample directly from well-behaved, analytical posteriors
+			# In the real world, often impossible to sample directly from $p(\theta \vert y)$
+			# A general class of algorithms called \textbf{Markov chain Monte Carlo} let us approximately sample from posterior
+		\end{easylist}		
+		\end{column}
+		\begin{column}{0.5\linewidth}
+		\includegraphics[scale=0.2]{figs/nasty_prior_posterior_example.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Markov chains}
+	\includegraphics[scale=.8]{figs/irreducible.pdf}
+	\begin{easylist}[itemize]
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# A Markov chain defines a joint probability distribution over sequences
+		# Used to model events in discrete and continuous time (manufacturing processes, queuing systems, etc.)
+		# Typically interested in the long-term distribution of being in a certain state
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Properties of a Markov chain}
+	\includegraphics[scale=.8]{figs/irreducible.pdf}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Memoryless (Markov property): $P(X_t\,|\,X_{t-1}, X_{t-2}, \ldots, X_1) = P(X_t\,|\,X_{t-1})$
+		# Under certain conditions, guaranteed to have a unique, limiting distribution (aka. stationary distribution)
+		## Long run proportion of time spent in each state
+		## For more details, check \footnotesize\texttt{https://github.com/smu095/presentations/}
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Monte Carlo simulations}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Monte Carlo (MC) simulations are just a way to approximate numerical results using repeated random sampling
+		# Main idea:
+		## Generate $N$ samples $x_1, \ldots, x_N$ from $p(x)$, approximate $f$ using the empirical distribution of $\{f(x_n)\}_{n=1}^N$
+		## $\mathbb{E}\left[ \, f \, \right] = \int f(x)p(x) \,dx \approx \frac{1}{N} \sum_{n=1}^{N} f(x_n) = \hat{f}$ 
+		# MC estimates converge thanks to Law of Large Numbers
+		## $(\hat{f} - \mathbb{E}\left[ \, f \, \right]) \rightarrow \mathcal{N}\Big(0, \frac{Var\left[\,f\,\right]}{N_{eff}}\Big)$ as $N \rightarrow \infty$
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Application: Evaluate integrals}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Calculate difficult integrals, such as the area of the Batman sign
+	\end{easylist}
+	\includegraphics[scale=0.3]{figs/bat_signal.png}
+\end{frame}
+%https://towardsdatascience.com/a-zero-math-introduction-to-markov-chain-monte-carlo-methods-dcba889e0c50
+
+\begin{frame}[fragile]{Application: Evaluate integrals}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# Repeatedly sample $(u_1, u_2) \sim \text{Uniform}(-\frac{1}{2}, \frac{1}{2})$
+		# Calculate area $A$ of Batman sign as $A = \textrm{area of rectangle} \times \frac{\textrm{green dots}}{\textrm{all dots}}$
+	\end{easylist}
+	\includegraphics[scale=0.3]{figs/bat_signal_mcs.png}
+\end{frame}
+
+\begin{frame}[fragile]{Markov chain Monte Carlo methods}
+	\begin{easylist}
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+		# \textbf{Main idea:} Construct a Markov chain over the parameter space where the stationary distribution is the posterior $p(\theta \,\vert\, y)$
+		## For more details, check \footnotesize\texttt{https://github.com/smu095/presentations/}
+		# Randomly move around the parameter space such that the fraction of time spent at each randomly sampled parameter value is proportional to the true target density $p(\theta \,\vert\,y)$.
+		# Use the sequence of parameters generated by Markov chain to calculate MC approximations of any quantity of interest
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Algorithmic view of MCMC}
+	\begin{easylist}[enumerate]
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
+		# Start at current position.
+		# Propose new position.
+		# Accept/reject new position based on position's adherence to data and prior distributions.
+		## If reject: Remain in your current position, return to step 1.
+		## If accept: Move to the new position, return to step 1.
+		# After large number of iterations, return sequence of accepted positions.
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Metropolis algorithm}
+	\begin{easylist}[enumerate]
+		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
+		# Start at some initial parameter value $\theta_0$
+		# for $t=1$ to $T$:
+		## Sample $\theta^*$ from a proposal distribution $q(\theta^* \, \vert \, \theta_{t-1})$
+		## Evaluate $\alpha_{\theta^*}= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)}$.\\
+		## Set acceptance probability to $r_{\theta^*}= \text{min}(1, \alpha_{\theta^*})$.\\
+		## Draw $u \sim Uniform(0, 1)$
+		## Set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < r \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
+	\end{easylist}
+\end{frame}
+
+\begin{frame}[fragile]{Metropolis in Python}
+	\inputminted[fontsize=\tiny]{python}{../code/metropolis.py}
+\end{frame}
+
+\begin{frame}[fragile]{Metropolis in Python}
+	\center
+	\includegraphics[width=.7\textwidth]{figs/metropolis.png}
+\end{frame}
+
+\begin{frame}[fragile]{Sampling algorithms}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			\begin{easylist}[itemize]
+				\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# Many different sampling algorithms exist
+				# Currently, the state-of-the-art is Hamiltonian Monte Carlo (HMC)
+				## See e.g. Betancourt (2017): \footnotesize\texttt{https://arxiv.org/abs/1701.02434}
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{figs/hmc.png}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Probabilistic programming in Python}
+	\begin{columns}
+		\begin{column}{0.5\linewidth}
+			\begin{easylist}[itemize]
+				\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# PyStan
+				# PyMC3
+				# Pyro
+				# TensorFlow Probability
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\includegraphics[width=\textwidth]{figs/logos.pdf}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{PyMC3}
+	\begin{columns}
+		\begin{column}{0.7\linewidth}
+			\begin{easylist}
+				\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
+				# Python package for for fitting Bayesian models using modern methods (MCMC, variational inference, etc.)
+				# Well-documented, large suite of statistical models
+				# Highly flexible, but easy to use
+				# Uses Theano-backend (not good)
+				# PyMC4 in development, uses TensorFlow Probability-backend
+			\end{easylist}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\includegraphics[width=\textwidth]{figs/pymc3.png}
+		\end{column}
+	\end{columns}
+\end{frame}
 
 \end{document}
