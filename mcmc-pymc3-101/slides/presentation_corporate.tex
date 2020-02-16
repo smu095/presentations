@@ -99,6 +99,15 @@
 \setbeamercolor{author in head/foot}{bg=black}
 \setbeamercolor{date in head/foot}{fg=titlered}
 
+% Itemize settings
+\setbeamercolor{itemize item}{fg=black}
+\setbeamercolor{itemize subitem}{fg=black}
+\setbeamercolor{itemize subsubitem}{fg=black}
+
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[circle]
+
 % Spacing for lsits
 \newcommand{\listSpace}{0.2em}
 
@@ -182,6 +191,57 @@
 		\end{column}
 	\end{columns}
 \end{frame}
+
+
+\begin{frame}[fragile]{Model}
+\begin{itemize}
+\item In the bayesian analysis we are trying to describe the process that generated the data. 
+\item We assume that the process can be expressed as a parametic model
+\end{itemize}
+\begin{equation*}
+\text{\text{M}}(input, \theta)
+\end{equation*}
+\end{frame}
+
+\begin{frame}[fragile]{Example}
+The oh so boring linear regression example....
+\begin{center}
+\includegraphics[width=0.5\textwidth]{figs/linreg_example.png}
+\end{center}
+Model:  \quad \quad  $ y_i = \theta  x_i + \epsilon_i, \quad \epsilon \sim N(0, \sigma^2)$
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Example: Priors}
+\begin{columns}
+    \column{.5\linewidth}
+        \begin{center}
+            \includegraphics[scale=0.6]{figs/linreg_theta1_example.png}
+        \end{center}
+    \column{.5\linewidth}
+        \begin{center}
+             \includegraphics[scale=0.6]{figs/linreg_theta2_example.png} 
+        \end{center}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[fragile]{Example: Likelihood}
+\begin{equation*}
+p(y|\theta) = \prod_{i=1}^n p(y_i|\theta)
+\end{equation*}
+
+\begin{equation*}
+p(y_i|\theta) = N(y_i|\theta x_i, \sigma^2)
+\end{equation*}
+   
+  
+\vspace{1cm}
+What is the probability of my data given the model and parameters I've chosen? 
+
+\end{frame}
+
 
 \begin{frame}[fragile]{Towards a Bayesian workflow}
 	\begin{easylist}[enumerate]
