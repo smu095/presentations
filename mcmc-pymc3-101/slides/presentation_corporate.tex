@@ -189,12 +189,6 @@
 	\end{center}
 \end{frame}
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> updates
 \begin{frame}[fragile]{Priors, posteriors and likelihoods}
 	\begin{columns}
 		\begin{column}{0.5\linewidth}
@@ -339,11 +333,7 @@ What is the probability of my data given the model and parameters I've chosen?
 				# Bayesian statistics
 				## Frequency $\neq$ probability
 				## Uncertainty arises from ignorance
-<<<<<<< HEAD
-				# Principled way to represent and take into account uncertainty
-=======
 				# Intuitive way to represent and take into account uncertainty
->>>>>>> updates
 				# Easily incorporates prior information
 			\end{easylist}
 		\end{column}
@@ -391,11 +381,6 @@ What is the probability of my data given the model and parameters I've chosen?
 	\includegraphics[scale=.8]{figs/irreducible.pdf}
 	\begin{easylist}[itemize]
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
-<<<<<<< HEAD
-		# A Markov chain defines a joint probability distribution over sequences
-		# Used to model events in discrete and continuous time (manufacturing processes, queuing systems, etc.)
-		# Typically interested in the long-term distribution of being in a certain state
-=======
 		# A Markov chain defines a joint probability distribution over a sequence of events
 		# Used to model events in discrete and continuous time (manufacturing processes, queuing systems, etc.)
 		# Typically interested in the long-term distribution of being in a certain state given an initial starting state
@@ -439,12 +424,10 @@ What is the probability of my data given the model and parameters I've chosen?
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
 		# Repeatedly sample $(u_1, u_2) \sim \text{Uniform}(-\frac{1}{2}, \frac{1}{2})$
 		# Calculate area $A$ of Batman sign as $A = \textrm{area of rectangle} \times \frac{\textrm{green dots}}{\textrm{all dots}}$
->>>>>>> updates
 	\end{easylist}
 	\includegraphics[scale=0.3]{figs/bat_signal_mcs.png}
 \end{frame}
 
-<<<<<<< HEAD
 \begin{frame}[fragile]{Properties of a Markov chain}
 	\includegraphics[scale=.8]{figs/irreducible.pdf}
 	\begin{easylist}
@@ -486,8 +469,6 @@ What is the probability of my data given the model and parameters I've chosen?
 	\includegraphics[scale=0.3]{figs/bat_signal_mcs.png}
 \end{frame}
 
-=======
->>>>>>> updates
 \begin{frame}[fragile]{Markov chain Monte Carlo methods}
 	\begin{easylist}
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace, Style2*=$\color{bggraydark}\blacktriangleright$\space)
@@ -501,33 +482,12 @@ What is the probability of my data given the model and parameters I've chosen?
 \begin{frame}[fragile]{Algorithmic view of MCMC}
 	\begin{easylist}[enumerate]
 		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
-<<<<<<< HEAD
 		# Start at current position.
 		# Propose new position.
 		# Accept/reject new position based on position's adherence to data and prior distributions.
 		## If reject: Remain in your current position, return to step 1.
 		## If accept: Move to the new position, return to step 1.
 		# After large number of iterations, return sequence of accepted positions.
-	\end{easylist}
-\end{frame}
-
-\begin{frame}[fragile]{Metropolis algorithm}
-	\begin{easylist}[enumerate]
-		\ListProperties(Space=\listSpace, Margin1=1ex, Margin2=2ex, Space*=\listSpace)
-		# Start at some initial parameter value $\theta_0$
-		# for $t=1$ to $T$:
-		## Sample $\theta^*$ from a proposal distribution $q(\theta^* \, \vert \, \theta_{t-1})$
-		## Evaluate $\alpha_{\theta^*}= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)}$.\\
-		## Set acceptance probability to $r_{\theta^*}= \text{min}(1, \alpha_{\theta^*})$.\\
-		## Draw $u \sim Uniform(0, 1)$
-		## Set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < r \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
-=======
-		# Start with current parameter values
-		# Propose new parameter values.
-		# Accept/reject new position based on parameters adherence to data and prior distributions.
-		## If reject: Keep current parameters, return to step 1.
-		## If accept: Update parameters to the new values, return to step 1.
-		# After large number of iterations, return sequence of accepted parameter values.
 	\end{easylist}
 \end{frame}
 
@@ -552,20 +512,10 @@ What is the probability of my data given the model and parameters I've chosen?
   
 		\quad Else draw  $u \sim Uniform(0, 1)$
 		\quad  set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < \alpha_{\theta^*} \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
-
->>>>>>> updates
 	\end{easylist}
 \end{frame}
 
 \begin{frame}[fragile]{Metropolis in Python}
-<<<<<<< HEAD
-	\inputminted[fontsize=\tiny]{python}{../code/metropolis.py}
-\end{frame}
-
-\begin{frame}[fragile]{Metropolis in Python}
-	\center
-	\includegraphics[width=.7\textwidth]{figs/metropolis.png}
-=======
 	\begin{center}
 		\inputminted[fontsize=\tiny]{python}{../code/metropolis.py}
 	\end{center}
@@ -575,7 +525,6 @@ What is the probability of my data given the model and parameters I've chosen?
 	\begin{center}
 		\includegraphics[width=.7\textwidth]{figs/metropolis.png}
 	\end{center}
->>>>>>> updates
 \end{frame}
 
 \begin{frame}[fragile]{Sampling algorithms}
