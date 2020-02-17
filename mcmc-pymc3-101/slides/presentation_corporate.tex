@@ -461,21 +461,29 @@ What is the probability of my data given the model and parameters I've chosen?
 		# Start at some initial parameter value $\theta_0$
 		# For $t=1$ to $T$:
 		## Sample $\theta^*$ from a proposal distribution $q(\theta^* \, \vert \, \theta_{t-1})$
+  
 		\quad  $\theta^* = \theta_{t-i} + \mathcal{N}(0, \text{jump scale})$
 		## Evaluate $\alpha_{\theta^*}= \dfrac{p(\theta^* \, \vert \, y)}{p(\theta_{t-1} \, \vert \, y)}$.\\
-		## Set acceptance probability to $r_{\theta^*}= \text{min}(1, \alpha_{\theta^*})$.\\
-		## Draw $u \sim Uniform(0, 1)$
-		## Set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < r \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
+		## Accept/reject $\theta^*$    
+  
+		\quad If $\alpha_{\theta^*} \geq 1 \text{ set } \theta_t=\theta^*$   
+  
+		\quad Else draw  $u \sim Uniform(0, 1)$
+		\quad  set $\theta_t = \begin{cases}\theta^*, &\text{if}\ u < \alpha_{\theta^*} \\ \theta_{t-1}, &\text{o.w.}\ \end{cases}$
+
 	\end{easylist}
 \end{frame}
 
 \begin{frame}[fragile]{Metropolis in Python}
-	\inputminted[fontsize=\tiny]{python}{../code/metropolis.py}
+	\begin{center}
+		\inputminted[fontsize=\tiny]{python}{../code/metropolis.py}
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Metropolis in Python}
-	\center
-	\includegraphics[width=.7\textwidth]{figs/metropolis.png}
+	\begin{center}
+		\includegraphics[width=.7\textwidth]{figs/metropolis.png}
+	\end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Sampling algorithms}
