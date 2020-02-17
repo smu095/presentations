@@ -22,7 +22,7 @@ This repo assumes that you have installed the [Anaconda distribution](https://ww
 
 ```bash
 $ conda env create -f environment.yml
-$ conda activate fagdag-pymc3
+$ conda activate fagdag
 ```
 
 To enable [`black`](https://black.readthedocs.io/en/stable/) for autoformatting code in Jupyter notebooks, enter the
